@@ -30,7 +30,7 @@ module DetransportTelegram
     end
 
     private def handle_location
-      text = I18n.translate("messages.nearest_stop")
+      text = I18n.translate("messages.nearest_stops")
 
       location = message.location.not_nil!
 
