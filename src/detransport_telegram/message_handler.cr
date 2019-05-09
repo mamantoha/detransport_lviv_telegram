@@ -51,16 +51,10 @@ module DetransportTelegram
     end
 
     private def build_keyboard_for_simital_stops(stops : Array(DetransportTelegram::Stop))
-      layout = [] of Array(TelegramBot::InlineKeyboardButton)
-
-      stops.each_slice(3) do |slice|
-        layout << slice.reduce([] of TelegramBot::InlineKeyboardButton) do |arry, stop|
-          text = "🚏 #{stop.name}"
-          arry << TelegramBot::InlineKeyboardButton.new(text: text, callback_data: "#{stop.id}")
-        end
+      stops.reduce([] of Array(TelegramBot::InlineKeyboardButton)) do |arry, stop|
+        text = "🚏 #{stop.name}"
+        arry << [TelegramBot::InlineKeyboardButton.new(text: text, callback_data: "#{stop.id}")]
       end
-
-      layout
     end
 
     private def stops

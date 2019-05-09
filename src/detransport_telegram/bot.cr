@@ -11,7 +11,6 @@ module DetransportTelegram
     end
 
     def handle(callback_query : TelegramBot::CallbackQuery)
-      puts callback_query.inspect
       DetransportTelegram::CallbackQueryHandler.new(callback_query, self).handle
     end
   end
