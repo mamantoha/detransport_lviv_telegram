@@ -21,18 +21,16 @@ module DetransportTelegram
     end
 
     private def handle_with(obj, klass)
-      begin
-        time = Time.utc
-        logger.info "> #{obj.class.name} #{obj.to_json}"
+      time = Time.utc
+      logger.info "> #{obj.class.name} #{obj.to_json}"
 
-        klass.new(obj, self).handle
+      klass.new(obj, self).handle
 
-        logger.debug("Handled #{obj.class.name} in #{Time.utc - time}")
-        return true
-      rescue e
-        logger.error(e.inspect_with_backtrace)
-        return false
-      end
+      logger.debug("Handled #{obj.class.name} in #{Time.utc - time}")
+      return true
+    rescue e
+      logger.error(e.inspect_with_backtrace)
+      return false
     end
   end
 end
