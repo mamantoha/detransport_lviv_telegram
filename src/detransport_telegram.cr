@@ -1,3 +1,4 @@
+require "logger"
 require "json"
 require "telegram_bot"
 require "dotenv"
