@@ -5,7 +5,7 @@ module DetransportTelegram
     include TelegramBot::CmdHandler
 
     def initialize
-      super(ENV["BOT_NAME"], ENV["BOT_TOKEN"])
+      super(Config.telegram_bot_name, Config.telegram_token)
     end
 
     protected def logger : Logger

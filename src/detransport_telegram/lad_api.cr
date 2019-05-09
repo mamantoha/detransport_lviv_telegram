@@ -2,8 +2,8 @@ module DetransportTelegram
   class LadAPI
     def initialize
       url = "https://api.eway.in.ua/"
-      login = ENV["EWAY_USER"].not_nil!
-      password = ENV["EWAY_PASSWORD"].not_nil!
+      login = Config.eway_user
+      password = Config.eway_password
 
       @conn = Crest::Resource.new(
         url,
