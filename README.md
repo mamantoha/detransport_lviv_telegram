@@ -1,14 +1,15 @@
 # detransport_telegram
 
-TODO: Write a description here
+Source code for https://telegram.me/DetransportBot
+
+<p>
+  <img src="https://github.com/mamantoha/detransport_telegram/blob/master/screenshots/screenshot1.jpg?raw=true" width="300" />
+  <img src="https://github.com/mamantoha/detransport_telegram/blob/master/screenshots/screenshot2.jpg?raw=true" width="300" />
+</p>
 
 ## Installation
 
 TODO: Write installation instructions here
-
-## Usage
-
-TODO: Write usage instructions here
 
 ## Development
 
