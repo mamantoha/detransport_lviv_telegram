@@ -1,0 +1,29 @@
+name: detransport_telegram
+version: 0.1.0
+
+dependencies:
+  dotenv:
+    github: gdotdesign/cr-dotenv
+  haversine:
+    github: mamantoha/haversine
+  crest:
+    github: mamantoha/crest
+  telegram_bot:
+    github: hangyas/telegram_bot
+    branch: master
+  jaro_winkler:
+    github: kostya/jaro_winkler
+  i18n:
+    github: TechMagister/i18n.cr
+    branch: master
+
+authors:
+  - Anton Maminov <anton.maminov@gmail.com>
+
+targets:
+  detransport_telegram:
+    main: src/detransport_telegram.cr
+
+crystal: 0.28.0
+
+license: MIT

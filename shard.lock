@@ -1,0 +1,26 @@
+version: 1.0
+shards:
+  crest:
+    github: mamantoha/crest
+    version: 0.19.0
+
+  dotenv:
+    github: gdotdesign/cr-dotenv
+    version: 0.2.0
+
+  haversine:
+    github: mamantoha/haversine
+    version: 0.1.0
+
+  i18n:
+    github: TechMagister/i18n.cr
+    commit: ead11152304c2bfae7bc09a8d6016be2b277a15f
+
+  jaro_winkler:
+    github: kostya/jaro_winkler
+    version: 0.1
+
+  telegram_bot:
+    github: hangyas/telegram_bot
+    commit: c46f930d19f394c0e26b3ddc77e967916c12bb08
+
