@@ -20,8 +20,6 @@ dependencies:
     github: imdrasil/jennifer.cr
   pg:
     github: will/crystal-pg
-
-development_dependencies:
   sam:
     github: imdrasil/sam.cr
 
