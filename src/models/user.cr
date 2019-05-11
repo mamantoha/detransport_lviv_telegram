@@ -5,8 +5,9 @@ class User < ApplicationRecord
     id: Primary32,
     telegram_id: Int32,
     first_name: String,
-    username: String,
-    language_code: String,
+    last_name: String?,
+    username: String?,
+    language_code: String?,
     created_at: Time?,
     updated_at: Time?,
   )

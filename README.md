@@ -17,6 +17,7 @@ Database commands:
 
 ```console
 crystal sam.cr -- db:setup
+crystal sam.cr -- db:migrate
 crystal sam.cr -- db:rollback
 crystal sam.cr -- db:drop
 ```
