@@ -20,6 +20,7 @@ module DetransportTelegram
     Dotenv.load
 
     bot = DetransportTelegram::Bot.new
+    logger.info "DetransportTelegram started."
     bot.polling
   end
 end
