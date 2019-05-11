@@ -1,8 +1,15 @@
+require "../ext/multi_writer"
+
 module DetransportTelegram
   @@logger : Logger?
 
   def self.logger
-    @@logger ||= Logger.new(STDOUT).tap do |l|
+    log_file = File.new("#{__DIR__}/../../log/detransport_telegram.log", "a")
+    stdout = STDOUT
+
+    writer = IO::MultiWriter.new(log_file, stdout)
+
+    @@logger ||= Logger.new(writer).tap do |l|
       l.level = Logger::Severity.parse("DEBUG")
     end
   end
