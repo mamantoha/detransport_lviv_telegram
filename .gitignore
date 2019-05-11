@@ -5,4 +5,4 @@
 /.shards/
 *.dwarf
 .env
-/config/.database.yml
+/config/database.yml
