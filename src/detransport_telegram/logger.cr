@@ -4,7 +4,7 @@ module DetransportTelegram
   @@logger : Logger?
 
   def self.logger
-    log_file = File.new("#{__DIR__}/../../log/detransport_telegram.log", "a")
+    log_file = File.new("#{__DIR__}/../../log/telegram.log", "a")
     stdout = STDOUT
 
     writer = IO::MultiWriter.new(log_file, stdout)
