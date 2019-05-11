@@ -8,6 +8,9 @@ require "jaro_winkler"
 require "i18n"
 require "./detransport_telegram/*"
 
+require "../config/initializers/database"
+require "./models/*"
+
 I18n::Backend::Yaml.embed(["#{__DIR__}/locales"])
 I18n.init
 

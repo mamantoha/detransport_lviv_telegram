@@ -13,6 +13,14 @@ TODO: Write installation instructions here
 
 ## Development
 
+Database commands:
+
+```console
+crystal sam.cr -- db:setup
+crystal sam.cr -- db:rollback
+crystal sam.cr -- db:drop
+```
+
 TODO: Write development instructions here
 
 ## Contributing

@@ -16,6 +16,14 @@ dependencies:
   i18n:
     github: TechMagister/i18n.cr
     branch: master
+  jennifer:
+    github: imdrasil/jennifer.cr
+  pg:
+    github: will/crystal-pg
+
+development_dependencies:
+  sam:
+    github: imdrasil/sam.cr
 
 authors:
   - Anton Maminov <anton.maminov@gmail.com>

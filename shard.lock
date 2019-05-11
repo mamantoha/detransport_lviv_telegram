@@ -4,6 +4,10 @@ shards:
     github: mamantoha/crest
     version: 0.19.1
 
+  db:
+    github: crystal-lang/crystal-db
+    version: 0.5.1
+
   dotenv:
     github: gdotdesign/cr-dotenv
     version: 0.2.0
@@ -16,9 +20,29 @@ shards:
     github: TechMagister/i18n.cr
     commit: ead11152304c2bfae7bc09a8d6016be2b277a15f
 
+  ifrit:
+    github: imdrasil/ifrit
+    version: 0.1.2
+
+  inflector:
+    github: phoffer/inflector.cr
+    version: 0.1.8
+
   jaro_winkler:
     github: kostya/jaro_winkler
     version: 0.1
+
+  jennifer:
+    github: imdrasil/jennifer.cr
+    version: 0.7.1
+
+  pg:
+    github: will/crystal-pg
+    version: 0.16.1
+
+  sam:
+    github: imdrasil/sam.cr
+    version: 0.3.0
 
   telegram_bot:
     github: hangyas/telegram_bot
