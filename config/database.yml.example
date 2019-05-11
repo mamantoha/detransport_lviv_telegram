@@ -1,7 +1,7 @@
 default: &default
-  host: ENV["PG_HOST"]
-  user: ENV["PG_USER"]
-  password: ENV["PG_PASS"]
+  host: localhost
+  user: postgres
+  password: ''
   adapter: postgres
   skip_dumping_schema_sql: true
 
