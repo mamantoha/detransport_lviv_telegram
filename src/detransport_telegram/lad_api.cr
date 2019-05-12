@@ -76,7 +76,7 @@ module DetransportTelegram
       property time_source : String
 
       def full_title
-        "#{transport_icon} *#{title}* _(#{direction_title})_ -- #{time_left_formatted}"
+        "#{transport_icon} *#{title}* _(#{direction_title})_ — #{time_left_formatted}"
       end
 
       def transport_icon
