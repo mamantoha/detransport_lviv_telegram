@@ -30,10 +30,10 @@ module DetransportTelegram
       end
     end
 
-    private def handle_similar_stops(text : String)
+    private def handle_similar_stops(stop : String)
       text = I18n.translate("messages.select_stop")
 
-      simital_stops = stops.similar_to(text.not_nil!)
+      simital_stops = stops.similar_to(stop)
 
       buttons = build_keyboard_for_simital_stops(simital_stops)
       keyboard = TelegramBot::InlineKeyboardMarkup.new(buttons)

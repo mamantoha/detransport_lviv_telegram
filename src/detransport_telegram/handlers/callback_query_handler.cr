@@ -25,13 +25,13 @@ module DetransportTelegram
       lad_routes = lad_api.show_routes(stop_id)
 
       routes = lad_routes.routes.reduce([] of String) do |arry, route|
-        arry << "#{route.transport_icon} *#{route.title}* _(#{route.direction_title})_ -- #{route.time_left_formatted}\n"
+        arry << route.full_title
       end
 
       text = String::Builder.build do |io|
-        io << "🚏 `#{lad_routes.title}`\n"
+        io << "🚏 `#{lad_routes.title}`" << "\n"
         io << "\n"
-        routes.each { |el| io << el }
+        routes.each { |el| io << el << "\n" }
       end.to_s
     end
   end
