@@ -10,18 +10,30 @@ module DetransportTelegram
 
     def handle
       if message_text = message.text
-        keyboard = TelegramBot::ReplyKeyboardRemove.new
-
-        handle_similar_stops
-      elsif message.location
-        handle_location
+        handle_text(message_text)
+      elsif message_location = message.location
+        handle_location(message_location)
       end
     end
 
-    private def handle_similar_stops
+    private def handle_text(text : String)
+      if text.starts_with?("/")
+        handle_commands(text)
+      else
+        handle_similar_stops(text)
+      end
+    end
+
+    private def handle_commands(text : String)
+      if text =~ /^\/(help|start)/
+        handle_help
+      end
+    end
+
+    private def handle_similar_stops(text : String)
       text = I18n.translate("messages.select_stop")
 
-      simital_stops = stops.similar_to(message.text.not_nil!)
+      simital_stops = stops.similar_to(text.not_nil!)
 
       buttons = build_keyboard_for_simital_stops(simital_stops)
       keyboard = TelegramBot::InlineKeyboardMarkup.new(buttons)
@@ -29,10 +41,8 @@ module DetransportTelegram
       bot.send_message(chat_id, text, reply_markup: keyboard)
     end
 
-    private def handle_location
+    private def handle_location(location : TelegramBot::Location)
       text = I18n.translate("messages.nearest_stops")
-
-      location = message.location.not_nil!
 
       nearest_stops = stops.nearest_to(location.latitude, location.longitude)
 
@@ -40,6 +50,20 @@ module DetransportTelegram
       keyboard = TelegramBot::InlineKeyboardMarkup.new(buttons)
 
       bot.send_message(chat_id, text, reply_markup: keyboard)
+    end
+
+    private def handle_help
+      text = I18n.translate("messages.help")
+
+      buttons = [
+        [
+          TelegramBot::KeyboardButton.new(I18n.translate("messages.share_location"), request_contact: false, request_location: true),
+        ],
+      ]
+
+      keyboard = TelegramBot::ReplyKeyboardMarkup.new(buttons, resize_keyboard: true)
+
+      bot.send_message(chat_id, text, reply_markup: keyboard, parse_mode: "Markdown")
     end
 
     private def build_keyboard_for_nearest_stops(stops : Array(DetransportTelegram::Stop), location : TelegramBot::Location)

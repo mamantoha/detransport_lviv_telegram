@@ -14,7 +14,8 @@ module DetransportTelegram
       if chat_id = @chat_id
         stop_id = @callback_query.data
 
-        bot.send_message(chat_id, routes_text(stop_id), parse_mode: "Markdown")
+        keyboard = TelegramBot::ReplyKeyboardRemove.new
+        bot.send_message(chat_id, routes_text(stop_id), parse_mode: "Markdown", reply_markup: keyboard)
       end
     end
 
