@@ -3,8 +3,9 @@
 Source code for <https://telegram.me/DetransportBot>
 
 <p>
-  <img src="https://github.com/mamantoha/detransport_telegram/blob/master/screenshots/screenshot1.jpg?raw=true" width="49%" />
-  <img src="https://github.com/mamantoha/detransport_telegram/blob/master/screenshots/screenshot2.jpg?raw=true" width="49%" />
+  <img src="https://github.com/mamantoha/detransport_telegram/blob/master/screenshots/screenshot3.jpg?raw=true" width="30%" />
+  <img src="https://github.com/mamantoha/detransport_telegram/blob/master/screenshots/screenshot1.jpg?raw=true" width="30%" />
+  <img src="https://github.com/mamantoha/detransport_telegram/blob/master/screenshots/screenshot2.jpg?raw=true" width="30%" />
 </p>
 
 ## Installation
