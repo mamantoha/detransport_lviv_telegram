@@ -1,5 +1,9 @@
 version: 1.0
 shards:
+  any_hash:
+    github: Sija/any_hash.cr
+    version: 0.2.2
+
   crest:
     github: mamantoha/crest
     version: 0.19.1
@@ -39,6 +43,10 @@ shards:
   pg:
     github: will/crystal-pg
     version: 0.16.1
+
+  raven:
+    github: Sija/raven.cr
+    version: 1.3.0
 
   sam:
     github: imdrasil/sam.cr

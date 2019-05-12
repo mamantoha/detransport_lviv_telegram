@@ -32,6 +32,7 @@ module DetransportTelegram
       return true
     rescue e
       logger.error(e.inspect_with_backtrace)
+      Raven.capture(e)
       return false
     end
 

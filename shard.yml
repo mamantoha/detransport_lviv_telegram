@@ -22,6 +22,8 @@ dependencies:
     github: will/crystal-pg
   sam:
     github: imdrasil/sam.cr
+  raven:
+    github: Sija/raven.cr
 
 authors:
   - Anton Maminov <anton.maminov@gmail.com>
