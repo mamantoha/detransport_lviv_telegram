@@ -36,5 +36,10 @@ module DetransportTelegram
     property longitude : Float64
 
     property name : String
+    property direction : String?
+
+    def full_name
+      [name, direction].join(" ").rstrip
+    end
   end
 end
