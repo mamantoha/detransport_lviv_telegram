@@ -10,23 +10,25 @@ module DetransportTelegram
 
     def handle
       if message_text = message.text
-        handle_text(message_text)
+        handle_text(message, message_text)
       elsif message_location = message.location
         handle_location(message_location)
       end
     end
 
-    private def handle_text(text : String)
+    private def handle_text(message, text : String)
       if text.starts_with?("/")
-        handle_commands(text)
+        handle_commands(message, text)
       else
         handle_similar_stops(text)
       end
     end
 
-    private def handle_commands(text : String)
+    private def handle_commands(message, text : String)
       if text =~ /^\/(help|start)/
         handle_help
+      elsif text =~ /^\/ping/
+        bot.reply(message, "🏓")
       end
     end
 
