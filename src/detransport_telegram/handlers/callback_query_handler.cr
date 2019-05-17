@@ -12,6 +12,8 @@ module DetransportTelegram
 
     def handle
       if chat_id = @chat_id
+        bot.answer_callback_query(@callback_query.id, cache_time: 1)
+
         stop_id = @callback_query.data
 
         keyboard = TelegramBot::ReplyKeyboardRemove.new
