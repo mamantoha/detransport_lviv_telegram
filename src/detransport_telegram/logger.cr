@@ -1,5 +1,3 @@
-require "../ext/multi_writer"
-
 module DetransportTelegram
   @@logger : Logger?
 
