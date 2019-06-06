@@ -10,20 +10,70 @@ Source code for <https://telegram.me/DetransportBot>
 
 ## Installation
 
-TODO: Write installation instructions here
+### Requirements
 
-## Development
+* Crystal
+* PostgreSQL
 
-Database commands:
+Clone repository:
+
+```console
+git clone https://github.com/mamantoha/detransport_lviv_telegram.git
+```
+
+### Setup Telegram
+
+Copy `.env.example` to `.env` and set variables
+
+### Setup Database
+
+Copy `db/database.yml.example` to `db/database.yml` and set PostgreSQL variables
 
 ```console
 crystal sam.cr -- db:setup
 crystal sam.cr -- db:migrate
-crystal sam.cr -- db:rollback
-crystal sam.cr -- db:drop
 ```
 
-TODO: Write development instructions here
+### Run
+
+```console
+shards build
+./bin/detransport_telegram
+```
+
+## Deployment
+
+### Linux with systemd
+
+Create `/etc/systemd/system/detransport_lviv_telegram.service`
+
+```ini
+[Unit]
+Description=Detransport Lviv Telegram service
+After=network.target
+StartLimitIntervalSec=0
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=1
+User=user
+WorkingDirectory=/path/to/detransport_lviv_telegram
+ExecStart=/path/to/detransport_lviv_telegram/bin/detransport_telegram &>/dev/null &
+StandardOutput=null
+StandardError=null
+
+[Install]
+WantedBy=multi-user.target
+```
+
+```console
+sudo systemctl enable detransport_lviv_telegram
+```
+
+```console
+sudo systemctl start detransport_lviv_telegram
+```
 
 ## Contributing
 
