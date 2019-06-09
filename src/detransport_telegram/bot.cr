@@ -50,5 +50,11 @@ module DetransportTelegram
         end
       end
     end
+
+    def self.stops
+      stops_json = File.open("#{__DIR__}/data/lviv_stops.json")
+
+      DetransportTelegram::Stops.new(DetransportTelegram::StopsIterator.from_json(stops_json))
+    end
   end
 end

@@ -18,10 +18,8 @@ module DetransportTelegram
       )
     end
 
-    def show_routes(code)
-      resp = @conn["/"].get(params: {"function" => "stops.GetStopInfo", "id" => code.to_s})
-
-      # puts resp.body
+    def show_routes(code : Int32)
+      resp = @conn["/"].get(params: {"function" => "stops.GetStopInfo", "id" => code})
 
       Routes.from_json(resp.body)
     end

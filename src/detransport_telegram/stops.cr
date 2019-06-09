@@ -5,6 +5,10 @@ module DetransportTelegram
     def initialize(@stops : StopsIterator)
     end
 
+    def get_by_id(stop_id : Int32)
+      stops.find { |stop| stop.id == stop_id }
+    end
+
     def nearest_to(latitude : Float64, longitude : Float64, count = 5)
       sorted_stops = stops.sort_by do |stop|
         Haversine.distance(stop.latitude, stop.longitude, latitude, longitude)

@@ -41,6 +41,7 @@ module DetransportTelegram
       text = I18n.translate("messages.select_stop")
       stop = swap_keyboard_layout_from_latin_to_ua(stop)
 
+      stops = DetransportTelegram::Bot.stops
       simital_stops = stops.similar_to(stop)
 
       buttons = build_keyboard_for_simital_stops(simital_stops)
@@ -52,6 +53,7 @@ module DetransportTelegram
     private def handle_location(location : TelegramBot::Location)
       text = I18n.translate("messages.nearest_stops")
 
+      stops = DetransportTelegram::Bot.stops
       nearest_stops = stops.nearest_to(location.latitude, location.longitude)
 
       buttons = build_keyboard_for_nearest_stops(nearest_stops, location)
@@ -87,12 +89,6 @@ module DetransportTelegram
         text = "🚏 #{stop.full_name}"
         arry << [TelegramBot::InlineKeyboardButton.new(text: text, callback_data: "#{stop.id}")]
       end
-    end
-
-    private def stops
-      stops_json = File.open("#{__DIR__}/../data/lviv_stops.json")
-
-      DetransportTelegram::Stops.new(DetransportTelegram::StopsIterator.from_json(stops_json))
     end
   end
 end
