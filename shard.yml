@@ -23,6 +23,10 @@ dependencies:
   sam:
     github: imdrasil/sam.cr
 
+development_dependencies:
+  ameba:
+    github: veelenga/ameba
+
 authors:
   - Anton Maminov <anton.maminov@gmail.com>
 

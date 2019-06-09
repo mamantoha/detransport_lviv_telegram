@@ -36,7 +36,7 @@ module DetransportTelegram
         arry << route.full_title
       end
 
-      text = String::Builder.build do |io|
+      String::Builder.build do |io|
         io << "🚏 `#{stop_title}`" << "\n"
         io << "\n"
         routes.each { |el| io << el << "\n" }
