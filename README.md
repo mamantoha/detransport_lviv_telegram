@@ -12,8 +12,8 @@ Source code for <https://t.me/DetransportBot>
 
 ### Requirements
 
-* Crystal
-* PostgreSQL
+- Crystal
+- PostgreSQL
 
 Clone repository:
 
