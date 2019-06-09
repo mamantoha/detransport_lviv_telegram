@@ -1,6 +1,6 @@
 # detransport_lviv_telegram
 
-Source code for <https://telegram.me/DetransportBot>
+Source code for <https://t.me/DetransportBot>
 
 <p>
   <img src="https://github.com/mamantoha/detransport_lviv_telegram/blob/master/screenshots/screenshot3.jpg?raw=true" width="30%" />
@@ -37,7 +37,7 @@ crystal sam.cr -- db:migrate
 ### Run
 
 ```console
-shards build
+shards build --release
 ./bin/detransport_telegram
 ```
 
