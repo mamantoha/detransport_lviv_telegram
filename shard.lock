@@ -22,7 +22,7 @@ shards:
 
   i18n:
     github: TechMagister/i18n.cr
-    commit: ead11152304c2bfae7bc09a8d6016be2b277a15f
+    commit: de24f4f82604b38610f87af1278348924dcb9714
 
   ifrit:
     github: imdrasil/ifrit
