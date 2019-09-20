@@ -27,7 +27,7 @@ Copy `.env.example` to `.env` and set variables
 
 ### Setup Database
 
-Copy `db/database.yml.example` to `db/database.yml` and set PostgreSQL variables
+Copy `config/database.yml.example` to `config/database.yml` and set PostgreSQL variables
 
 ```console
 crystal sam.cr -- db:setup
@@ -37,7 +37,7 @@ crystal sam.cr -- db:migrate
 ### Run
 
 ```console
-shards build --release
+shards build --release --production
 ./bin/detransport_telegram
 ```
 
