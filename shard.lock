@@ -10,7 +10,7 @@ shards:
 
   db:
     github: crystal-lang/crystal-db
-    version: 0.6.0
+    version: 0.7.0
 
   dotenv:
     github: gdotdesign/cr-dotenv
@@ -42,11 +42,11 @@ shards:
 
   jennifer:
     github: imdrasil/jennifer.cr
-    commit: 7ffd4c4ae0d264fdc17c5d659fc610aef4291598
+    commit: 77c6101954bb756763d762e33b5f61b585cb6755
 
   pg:
     github: will/crystal-pg
-    version: 0.18.1
+    version: 0.19.0
 
   sam:
     github: imdrasil/sam.cr
