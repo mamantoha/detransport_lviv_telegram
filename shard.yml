@@ -18,6 +18,7 @@ dependencies:
     branch: master
   jennifer:
     github: imdrasil/jennifer.cr
+    branch: master
   pg:
     github: will/crystal-pg
   sam:
