@@ -26,7 +26,7 @@ shards:
 
   i18n:
     github: TechMagister/i18n.cr
-    commit: ed60fa3268a8e319c7a6c9a01dab519dd47846a7
+    commit: 7e8168f2a0d567d3722a70b3a3a1028930e1c47e
 
   ifrit:
     github: imdrasil/ifrit
@@ -42,7 +42,7 @@ shards:
 
   jennifer:
     github: imdrasil/jennifer.cr
-    commit: 77c6101954bb756763d762e33b5f61b585cb6755
+    version: 0.8.2
 
   pg:
     github: will/crystal-pg
