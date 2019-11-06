@@ -42,7 +42,7 @@ shards:
 
   jennifer:
     github: imdrasil/jennifer.cr
-    commit: 6bcfb511bc55a911bab3e6524776d92a8d9fa553
+    commit: 8f15f95d648a8843778123b52dad94019f873ab7
 
   pg:
     github: will/crystal-pg
@@ -50,7 +50,7 @@ shards:
 
   sam:
     github: imdrasil/sam.cr
-    version: 0.3.1
+    version: 0.3.2
 
   telegram_bot:
     github: hangyas/telegram_bot
