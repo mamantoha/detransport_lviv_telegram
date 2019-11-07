@@ -38,6 +38,7 @@ module DetransportTelegram
 
       String::Builder.build do |io|
         io << "🚏 `#{stop_title}`" << "\n"
+        io << "#{I18n.translate("messages.show_stop_on_map")}: /#{stop_id}" << "\n"
         io << "\n"
         routes.each { |el| io << el << "\n" }
       end.to_s
