@@ -16,9 +16,13 @@ shards:
     github: gdotdesign/cr-dotenv
     version: 0.3.1
 
+  geo_coord:
+    github: mamantoha/geo_coord
+    version: 0.1.0
+
   haversine:
     github: mamantoha/haversine
-    version: 0.1.0
+    version: 0.2.0
 
   http-client-digest_auth:
     github: mamantoha/http-client-digest_auth

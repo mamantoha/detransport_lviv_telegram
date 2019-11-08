@@ -97,12 +97,14 @@ module DetransportTelegram
     private def handle_stop_location(stop_id : Int32)
       stops = DetransportTelegram::Bot.stops
       if stop = stops.get_by_id(stop_id)
+        coord = Geo::Coord.new(stop.latitude, stop.longitude)
+
         bot.send_venue(
           chat_id,
           latitude: stop.latitude,
           longitude: stop.longitude,
           title: stop.full_name,
-          address: "(#{stop.latitude}, #{stop.longitude})"
+          address: coord.to_s
         )
       end
     end

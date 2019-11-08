@@ -23,6 +23,8 @@ dependencies:
     github: will/crystal-pg
   sam:
     github: imdrasil/sam.cr
+  geo_coord:
+    github: mamantoha/geo_coord
 
 development_dependencies:
   ameba:
