@@ -5,7 +5,7 @@ dependencies:
   dotenv:
     github: gdotdesign/cr-dotenv
   haversine:
-    github: mamantoha/haversine
+    github: geocrystal/haversine
   crest:
     github: mamantoha/crest
   telegram_bot:
@@ -23,8 +23,8 @@ dependencies:
     github: will/crystal-pg
   sam:
     github: imdrasil/sam.cr
-  geo_coord:
-    github: mamantoha/geo_coord
+  geo:
+    github: geocrystal/geo
 
 development_dependencies:
   ameba:

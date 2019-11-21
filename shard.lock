@@ -16,13 +16,13 @@ shards:
     github: gdotdesign/cr-dotenv
     version: 0.3.1
 
-  geo_coord:
-    github: mamantoha/geo_coord
-    version: 0.1.0
+  geo:
+    github: geocrystal/geo
+    version: 0.3.0
 
   haversine:
-    github: mamantoha/haversine
-    version: 0.2.0
+    github: geocrystal/haversine
+    version: 0.2.1
 
   http-client-digest_auth:
     github: mamantoha/http-client-digest_auth
@@ -46,7 +46,7 @@ shards:
 
   jennifer:
     github: imdrasil/jennifer.cr
-    commit: 8f15f95d648a8843778123b52dad94019f873ab7
+    commit: aac79fe2f1fe8c566f62e17cf1fd964930ad0c99
 
   pg:
     github: will/crystal-pg
