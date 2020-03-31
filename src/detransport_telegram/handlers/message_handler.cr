@@ -104,7 +104,7 @@ module DetransportTelegram
           latitude: stop.latitude,
           longitude: stop.longitude,
           title: stop.full_name,
-          address: coord.to_s
+          address: "\n🧭 #{coord}"
         )
       end
     end
