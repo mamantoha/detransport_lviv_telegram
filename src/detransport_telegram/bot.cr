@@ -8,10 +8,6 @@ module DetransportTelegram
       super(Config.telegram_bot_name, Config.telegram_token)
     end
 
-    protected def logger : Logger
-      DetransportTelegram.logger
-    end
-
     def handle(message : TelegramBot::Message)
       handle_with(message, DetransportTelegram::MessageHandler)
     end
@@ -22,7 +18,7 @@ module DetransportTelegram
 
     private def handle_with(obj, klass)
       time = Time.utc
-      logger.info "> #{obj.class.name} #{obj.to_json}"
+      DetransportTelegram::Log.info { "> #{obj.class.name} #{obj.to_json}" }
 
       if user = load_user(obj)
         user.updated_at = Time.local(Jennifer::Config.local_time_zone)
@@ -31,10 +27,10 @@ module DetransportTelegram
 
       klass.new(obj, self).handle
 
-      logger.debug("Handled #{obj.class.name} in #{Time.utc - time}")
+      DetransportTelegram::Log.debug { "Handled #{obj.class.name} in #{Time.utc - time}" }
       true
     rescue e
-      logger.error(e.inspect_with_backtrace)
+      DetransportTelegram::Log.error { e.inspect_with_backtrace }
       false
     end
 
