@@ -37,6 +37,8 @@ module DetransportTelegram
           stop_id = m[1].to_i
           handle_stop_location(stop_id)
         end
+      else
+        nil
       end
     end
 
