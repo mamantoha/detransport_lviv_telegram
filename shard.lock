@@ -22,7 +22,7 @@ shards:
 
   geo:
     git: https://github.com/geocrystal/geo.git
-    version: 0.6.0
+    version: 0.6.1
 
   haversine:
     git: https://github.com/geocrystal/haversine.git
@@ -61,6 +61,6 @@ shards:
     version: 0.3.2
 
   telegram_bot:
-    path: ../telegram_bot
-    version: 0.1.0
+    git: https://github.com/mamantoha/telegram_bot.git
+    version: 0.1.0+git.commit.54309047e142de240b14ef67cd8da9797d48d8a4
 

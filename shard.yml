@@ -9,9 +9,8 @@ dependencies:
   crest:
     github: mamantoha/crest
   telegram_bot:
-    path: ../telegram_bot
-    # github: hangyas/telegram_bot
-    # branch: master
+    github: mamantoha/telegram_bot
+    branch: develop
   jaro_winkler:
     github: kostya/jaro_winkler
   i18n:
