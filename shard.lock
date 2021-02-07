@@ -2,15 +2,15 @@ version: 2.0
 shards:
   ameba:
     git: https://github.com/crystal-ameba/ameba.git
-    version: 0.13.2
+    version: 0.13.4
 
   convex_hull:
     git: https://github.com/geocrystal/convex_hull.git
-    version: 0.2.0
+    version: 0.2.1
 
   crest:
     git: https://github.com/mamantoha/crest.git
-    version: 0.26.1
+    version: 0.26.6
 
   db:
     git: https://github.com/crystal-lang/crystal-db.git
@@ -22,19 +22,19 @@ shards:
 
   geo:
     git: https://github.com/geocrystal/geo.git
-    version: 0.6.1
+    version: 0.6.2
 
   haversine:
     git: https://github.com/geocrystal/haversine.git
-    version: 0.3.0
+    version: 0.3.1
 
   http-client-digest_auth:
     git: https://github.com/mamantoha/http-client-digest_auth.git
-    version: 0.4.0
+    version: 0.6.0
 
   http_proxy:
     git: https://github.com/mamantoha/http_proxy.git
-    version: 0.7.1
+    version: 0.8.0
 
   i18n:
     git: https://github.com/TechMagister/i18n.cr.git
@@ -54,11 +54,11 @@ shards:
 
   jennifer:
     git: https://github.com/imdrasil/jennifer.cr.git
-    version: 0.9.0+git.commit.22bbaa466856594ef601589faae25320c8aa3f20
+    version: 0.10.0+git.commit.e55ca7700bb36878eed5e127c99d5401fe1bf388
 
   pg:
     git: https://github.com/will/crystal-pg.git
-    version: 0.22.1
+    version: 0.23.1
 
   sam:
     git: https://github.com/imdrasil/sam.cr.git
@@ -66,5 +66,5 @@ shards:
 
   telegram_bot:
     git: https://github.com/mamantoha/telegram_bot.git
-    version: 0.2.1+git.commit.2368a55f82e6a7306c5eaff7805a8361ba2ac990
+    version: 0.2.2+git.commit.0991b6a0d681714e42c37aa0c8282133d8c38863
 
