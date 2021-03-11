@@ -2,11 +2,8 @@
 
 Source code for <https://t.me/DetransportBot>
 
-<p>
-  <img src="https://github.com/mamantoha/detransport_lviv_telegram/blob/master/screenshots/screenshot3.jpg?raw=true" width="30%" />
-  <img src="https://github.com/mamantoha/detransport_lviv_telegram/blob/master/screenshots/screenshot1.jpg?raw=true" width="30%" />
-  <img src="https://github.com/mamantoha/detransport_lviv_telegram/blob/master/screenshots/screenshot2.jpg?raw=true" width="30%" />
-</p>
+| ![image](https://github.com/mamantoha/detransport_lviv_telegram/blob/master/screenshots/screenshot3.jpg?raw=true) | ![image](https://github.com/mamantoha/detransport_lviv_telegram/blob/master/screenshots/screenshot1.jpg?raw=true) | ![image](https://github.com/mamantoha/detransport_lviv_telegram/blob/master/screenshots/screenshot2.jpg?raw=true) |
+| --- | --- | --- |
 
 ## Installation
 
