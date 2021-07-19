@@ -1,10 +1,8 @@
 ## Lviv stops
 
-Visit <https://www.eway.in.ua/ua/cities/lviv>
-
-and find URL in DevTools:
-
-`GET https://www.eway.in.ua/mobile_ajax/ua/lviv/stops`
+```console
+curl 'https://www.eway.in.ua/mobile_ajax/ua/lviv/stops' -H 'X-Requested-With: XMLHttpRequest' -H 'Cookie: city[key]=lviv; mobile_version=1; lang=ua' > stops.json
+```
 
 Download response as JSON.
 
