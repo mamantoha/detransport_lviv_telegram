@@ -15,6 +15,7 @@ dependencies:
     github: kostya/jaro_winkler
   i18n:
     github: TechMagister/i18n.cr
+    branch: master
   jennifer:
     github: imdrasil/jennifer.cr
     branch: master

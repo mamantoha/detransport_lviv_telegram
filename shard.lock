@@ -2,7 +2,7 @@ version: 2.0
 shards:
   ameba:
     git: https://github.com/crystal-ameba/ameba.git
-    version: 0.13.4
+    version: 0.14.3
 
   convex_hull:
     git: https://github.com/geocrystal/convex_hull.git
@@ -10,15 +10,15 @@ shards:
 
   crest:
     git: https://github.com/mamantoha/crest.git
-    version: 0.26.6
+    version: 0.27.0
 
   db:
     git: https://github.com/crystal-lang/crystal-db.git
-    version: 0.10.0
+    version: 0.10.1
 
   dotenv:
     git: https://github.com/gdotdesign/cr-dotenv.git
-    version: 0.7.0
+    version: 1.0.0
 
   geo:
     git: https://github.com/geocrystal/geo.git
@@ -38,15 +38,15 @@ shards:
 
   i18n:
     git: https://github.com/techmagister/i18n.cr.git
-    version: 0.3.1
+    version: 0.3.1+git.commit.b323291b772c97bc1661888eb9e82dadb722acaa
 
   ifrit:
     git: https://github.com/imdrasil/ifrit.git
-    version: 0.1.2
+    version: 0.1.3
 
   inflector:
     git: https://github.com/phoffer/inflector.cr.git
-    version: 0.1.8
+    version: 1.0.0
 
   jaro_winkler:
     git: https://github.com/kostya/jaro_winkler.git
@@ -54,15 +54,15 @@ shards:
 
   jennifer:
     git: https://github.com/imdrasil/jennifer.cr.git
-    version: 0.10.0+git.commit.e55ca7700bb36878eed5e127c99d5401fe1bf388
+    version: 0.11.0+git.commit.ecbadd4d93d2114d955f1689a4c2177dce29c67a
 
   pg:
     git: https://github.com/will/crystal-pg.git
-    version: 0.23.1
+    version: 0.24.0
 
   sam:
     git: https://github.com/imdrasil/sam.cr.git
-    version: 0.4.0
+    version: 0.4.1
 
   telegram_bot:
     git: https://github.com/mamantoha/telegram_bot.git
