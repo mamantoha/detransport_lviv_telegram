@@ -13,9 +13,6 @@ dependencies:
     branch: develop
   jaro_winkler:
     github: kostya/jaro_winkler
-  i18n:
-    github: TechMagister/i18n.cr
-    branch: master
   jennifer:
     github: imdrasil/jennifer.cr
     branch: master
@@ -37,6 +34,6 @@ targets:
   detransport_telegram:
     main: src/detransport_telegram.cr
 
-crystal: ">= 0.36.0"
+crystal: 1.2.0
 
 license: MIT
