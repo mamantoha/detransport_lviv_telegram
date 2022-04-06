@@ -1,10 +1,10 @@
 require "json"
 require "crest"
 
-alias Stops = Hash(String, Array(StopElement))
-alias StopElement = Int32 | String | Stop
+alias EwayStops = Hash(String, Array(EwayStopElement))
+alias EwayStopElement = Int32 | String | EwayStop
 
-class Stop
+class EwayStop
   include JSON::Serializable
 
   property trol : String?
@@ -21,13 +21,12 @@ response = Crest.get(
   cookies: {"city" => {"key" => "lviv"}, "mobile_version" => 1}
 )
 
-json = JSON.parse(response.body)
-stops = Stops.from_json(response.body)
+eway_stops = EwayStops.from_json(response.body)
 
-stops_arry = [] of Hash(String, String | Float64 | Int32)
+stops = [] of Hash(String, String | Float64 | Int32)
 
-stops.each do |stop_id, value|
-  stops_arry << {
+eway_stops.each do |stop_id, value|
+  stops << {
     "id"   => stop_id.to_i,
     "lat"  => value[0].to_s.insert(2, '.').to_f,
     "lng"  => value[1].to_s.insert(2, '.').to_f,
@@ -35,6 +34,6 @@ stops.each do |stop_id, value|
   }
 end
 
-stops_arry.sort_by! { |hsh| hsh["id"].to_i }
+stops.sort_by! { |hsh| hsh["id"].to_i }
 
-File.write("./src/detransport_telegram/data/lviv_stops.json", stops_arry.to_pretty_json, mode: "w")
+File.write("./src/detransport_telegram/data/lviv_stops.json", stops.to_pretty_json, mode: "w")
