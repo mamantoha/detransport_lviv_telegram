@@ -38,6 +38,16 @@ shards build --release --production
 ./bin/detransport_telegram
 ```
 
+## Development
+
+### Update stops
+
+To update `./src/detransport_telegram/data/lviv_stops.json` run:
+
+```console
+crystal utils/update_stops.cr
+```
+
 ## Deployment
 
 ### Linux with systemd
