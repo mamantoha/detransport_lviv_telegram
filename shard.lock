@@ -10,11 +10,11 @@ shards:
 
   crest:
     git: https://github.com/mamantoha/crest.git
-    version: 1.0.1
+    version: 1.2.1
 
   db:
     git: https://github.com/crystal-lang/crystal-db.git
-    version: 0.10.1
+    version: 0.11.0
 
   dotenv:
     git: https://github.com/gdotdesign/cr-dotenv.git
@@ -34,7 +34,7 @@ shards:
 
   http_proxy:
     git: https://github.com/mamantoha/http_proxy.git
-    version: 0.8.0
+    version: 0.9.0
 
   i18n:
     git: https://github.com/crimson-knight/i18n.cr.git
@@ -54,11 +54,11 @@ shards:
 
   jennifer:
     git: https://github.com/imdrasil/jennifer.cr.git
-    version: 0.12.0+git.commit.63202d39e0a1ed6e9b98c620098535cc593d77ce
+    version: 0.12.0+git.commit.3d5150cbe7aee19498cffb69ca877b97d34f0262
 
   pg:
     git: https://github.com/will/crystal-pg.git
-    version: 0.24.0
+    version: 0.26.0
 
   sam:
     git: https://github.com/imdrasil/sam.cr.git
