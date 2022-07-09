@@ -2,7 +2,7 @@ class User < ApplicationRecord
   with_timestamps
 
   mapping(
-    id: Primary32,
+    id: Primary64,
     telegram_id: Int32,
     first_name: String,
     last_name: String?,
