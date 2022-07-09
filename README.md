@@ -52,7 +52,7 @@ $ crystal sam.cr generate:migration ChangeUserId
 To update `./src/detransport_telegram/data/lviv_stops.json` run:
 
 ```console
-crystal utils/update_stops.cr
+crystal ./utils/update_stops.cr
 ```
 
 ## Deployment
