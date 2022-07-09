@@ -40,6 +40,13 @@ shards build --release --production
 
 ## Development
 
+### DB Migration
+
+```console
+$ crystal sam.cr generate:migration ChangeUserId
+./db/migrations/20220709130450248_change_user_id.cr was successfully created.
+```
+
 ### Update stops
 
 To update `./src/detransport_telegram/data/lviv_stops.json` run:
