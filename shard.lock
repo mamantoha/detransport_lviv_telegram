@@ -2,11 +2,11 @@ version: 2.0
 shards:
   ameba:
     git: https://github.com/crystal-ameba/ameba.git
-    version: 1.0.0
+    version: 1.1.0
 
   convex_hull:
     git: https://github.com/geocrystal/convex_hull.git
-    version: 0.3.0
+    version: 0.5.0
 
   crest:
     git: https://github.com/mamantoha/crest.git
@@ -58,7 +58,7 @@ shards:
 
   jennifer:
     git: https://github.com/imdrasil/jennifer.cr.git
-    version: 0.12.0+git.commit.d6ba913a224bd147bd95d36d9cd580ef0a177e48
+    version: 0.12.0+git.commit.2c34a1328bf03ebc72698f0edecbfa81fd5a4f96
 
   pg:
     git: https://github.com/will/crystal-pg.git
