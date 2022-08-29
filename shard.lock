@@ -58,7 +58,7 @@ shards:
 
   jennifer:
     git: https://github.com/imdrasil/jennifer.cr.git
-    version: 0.12.0+git.commit.2c34a1328bf03ebc72698f0edecbfa81fd5a4f96
+    version: 0.12.0+git.commit.ec6ccd5362da75e2d74f701de414f3da5c9d2834
 
   pg:
     git: https://github.com/will/crystal-pg.git
