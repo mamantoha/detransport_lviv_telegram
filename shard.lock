@@ -10,7 +10,7 @@ shards:
 
   crest:
     git: https://github.com/mamantoha/crest.git
-    version: 1.3.1
+    version: 1.3.6
 
   db:
     git: https://github.com/crystal-lang/crystal-db.git
@@ -58,7 +58,7 @@ shards:
 
   jennifer:
     git: https://github.com/imdrasil/jennifer.cr.git
-    version: 0.12.0+git.commit.ec6ccd5362da75e2d74f701de414f3da5c9d2834
+    version: 0.12.0+git.commit.be636b5290b2b2e58d87e3d8d70ddf6d6e01ce1c
 
   pg:
     git: https://github.com/will/crystal-pg.git
