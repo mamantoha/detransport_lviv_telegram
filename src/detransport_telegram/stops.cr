@@ -22,7 +22,7 @@ module DetransportTelegram
         if name.size >= 4 && stop.name.downcase.includes?(name.downcase)
           1
         else
-          JaroWinkler.new.distance(name.downcase, stop.name.downcase)
+          JaroWinkler.new.distance(name.downcase, stop.name.sub("вул. ", "").downcase)
         end
       end
 
