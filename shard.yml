@@ -34,6 +34,6 @@ targets:
   detransport_telegram:
     main: src/detransport_telegram.cr
 
-crystal: 1.5.0
+crystal: 1.6.0
 
 license: MIT
