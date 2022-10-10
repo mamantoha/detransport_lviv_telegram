@@ -87,6 +87,8 @@ module DetransportTelegram
           "🚌"
         when "tram"
           "🚃"
+        when "train"
+          "🚆"
         else
           "🚌"
         end
