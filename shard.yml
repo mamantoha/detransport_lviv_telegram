@@ -11,8 +11,6 @@ dependencies:
   telegram_bot:
     github: mamantoha/telegram_bot
     branch: develop
-  jaro_winkler:
-    github: kostya/jaro_winkler
   jennifer:
     github: imdrasil/jennifer.cr
     branch: master
@@ -22,6 +20,8 @@ dependencies:
     github: imdrasil/sam.cr
   geo:
     github: geocrystal/geo
+  fuzzy_match:
+    github: acoustep/fuzzy_match.cr
 
 development_dependencies:
   ameba:
