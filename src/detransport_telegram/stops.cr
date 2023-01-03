@@ -5,28 +5,24 @@ module DetransportTelegram
     def initialize(@stops : StopsIterator)
     end
 
-    def get_by_id(stop_id : Int32)
+    def get_by_id(stop_id : Int32) : Stop?
       stops.find { |stop| stop.id == stop_id }
     end
 
-    def nearest_to(latitude : Float64, longitude : Float64, count = 5)
-      sorted_stops = stops.sort_by do |stop|
-        Haversine.distance(stop.latitude, stop.longitude, latitude, longitude)
-      end
-
-      sorted_stops.first(count)
+    def nearest_to(latitude : Float64, longitude : Float64, count = 5) : Array(Stop)
+      stops
+        .sort_by { |stop| Haversine.distance(stop.latitude, stop.longitude, latitude, longitude) }
+        .first(count)
     end
 
-    def similar_to(name : String, count = 9)
-      similar_stops = stops.sort_by do |stop|
-        if name.size >= 4 && stop.name.downcase.includes?(name.downcase)
-          1
-        else
-          JaroWinkler.new.distance(name.downcase, stop.name.sub("вул. ", "").downcase)
-        end
-      end
-
-      similar_stops.reverse.first(count)
+    def similar_to(name : String, count = 9) : Array(Stop)
+      stops
+        .map { |stop| {stop, FuzzyMatch::Full.new(name, stop.name.sub("вул. ", ""))} }
+        .select(&.[1].matches?)
+        .sort_by!(&.[1].score)
+        .reverse!
+        .map(&.[0])
+        .first(count)
     end
   end
 

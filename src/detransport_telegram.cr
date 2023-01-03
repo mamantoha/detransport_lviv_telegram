@@ -9,7 +9,7 @@ require "dotenv"
 require "haversine"
 require "geo"
 require "crest"
-require "jaro_winkler"
+require "fuzzy_match"
 require "i18n"
 require "./detransport_telegram/*"
 
