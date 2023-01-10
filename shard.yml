@@ -1,6 +1,8 @@
 name: detransport_lviv_telegram
 version: 0.1.0
 
+crystal: 1.7.0
+
 dependencies:
   dotenv:
     github: gdotdesign/cr-dotenv
@@ -33,7 +35,5 @@ authors:
 targets:
   detransport_telegram:
     main: src/detransport_telegram.cr
-
-crystal: 1.6.2
 
 license: MIT
