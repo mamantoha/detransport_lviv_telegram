@@ -55,14 +55,14 @@ module DetransportTelegram
       property transport_key : String
 
       @[JSON::Field(key: "hasGPS")]
-      property has_gps : Bool
+      property? has_gps : Bool
 
-      property handicapped : Bool
+      property? handicapped : Bool
 
-      property wifi : Bool
+      property? wifi : Bool
 
       @[JSON::Field(key: "hasSchedules")]
-      property has_schedules : Bool
+      property? has_schedules : Bool
 
       @[JSON::Field(key: "timeLeft")]
       property time_left : String
