@@ -48,16 +48,21 @@ module DetransportTelegram
     end
 
     private def handle_similar_stops(stop : String)
-      text = I18n.translate("messages.select_stop")
-      stop = swap_keyboard_layout_from_latin_to_ua(stop)
-
       stops = DetransportTelegram::Bot.stops
-      simital_stops = stops.similar_to(stop)
 
-      buttons = build_keyboard_for_simital_stops(simital_stops)
-      keyboard = TelegramBot::InlineKeyboardMarkup.new(buttons)
+      stop = swap_keyboard_layout_from_latin_to_ua(stop)
+      similar_stops = stops.similar_to(stop)
 
-      bot.send_message(chat_id, text, reply_markup: keyboard)
+      if similar_stops.empty?
+        text = I18n.translate("messages.stops_not_found")
+        bot.send_message(chat_id, text)
+      else
+        buttons = build_keyboard_for_similar_stops(similar_stops)
+        keyboard = TelegramBot::InlineKeyboardMarkup.new(buttons)
+
+        text = I18n.translate("messages.select_stop")
+        bot.send_message(chat_id, text, reply_markup: keyboard)
+      end
     end
 
     private def handle_about
@@ -119,7 +124,7 @@ module DetransportTelegram
       end
     end
 
-    private def build_keyboard_for_simital_stops(stops : Array(DetransportTelegram::Stop))
+    private def build_keyboard_for_similar_stops(stops : Array(DetransportTelegram::Stop))
       stops.reduce([] of Array(TelegramBot::InlineKeyboardButton)) do |arry, stop|
         text = "🚏 #{stop.full_name}"
         arry << [TelegramBot::InlineKeyboardButton.new(text: text, callback_data: "#{stop.id}")]
