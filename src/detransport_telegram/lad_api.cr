@@ -80,11 +80,11 @@ module DetransportTelegram
       def transport_icon
         case transport_key
         when "bus"
-          "🚍"
+          "🚌"
         when "trol"
           "🚎"
         when "marshrutka"
-          "🚌"
+          "🚐"
         when "tram"
           "🚃"
         when "train"
