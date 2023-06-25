@@ -3,7 +3,7 @@ class User < ApplicationRecord
 
   mapping(
     id: Primary64,
-    telegram_id: Int32,
+    telegram_id: Int64,
     first_name: String,
     last_name: String?,
     username: String?,
