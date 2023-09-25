@@ -1,7 +1,7 @@
 name: detransport_lviv_telegram
 version: 0.1.0
 
-crystal: 1.8.1
+crystal: 1.9.2
 
 dependencies:
   dotenv:
@@ -24,10 +24,6 @@ dependencies:
     github: geocrystal/geo
   fuzzy_match:
     github: acoustep/fuzzy_match.cr
-
-development_dependencies:
-  ameba:
-    github: crystal-ameba/ameba
 
 authors:
   - Anton Maminov <anton.maminov@gmail.com>
