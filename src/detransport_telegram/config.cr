@@ -17,5 +17,9 @@ module DetransportTelegram
     def eway_password : String
       ENV["EWAY_PASSWORD"]
     end
+
+    def self.date
+      {{ `date -R`.stringify.chomp }}
+    end
   end
 end
