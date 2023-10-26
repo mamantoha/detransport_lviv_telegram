@@ -62,7 +62,7 @@ shards:
 
   telegram_bot:
     git: https://github.com/mamantoha/telegram_bot.git
-    version: 0.4.0+git.commit.873fdfd02e11a23ae7a59da50c5aacc7ae2fe28d
+    version: 0.5.0+git.commit.99199d0109b9d8f59582131df4c5704c00434288
 
   wordsmith:
     git: https://github.com/luckyframework/wordsmith.git
