@@ -6,11 +6,11 @@ shards:
 
   crest:
     git: https://github.com/mamantoha/crest.git
-    version: 1.3.12
+    version: 1.3.13
 
   db:
     git: https://github.com/crystal-lang/crystal-db.git
-    version: 0.12.0
+    version: 0.13.1
 
   dotenv:
     git: https://github.com/gdotdesign/cr-dotenv.git
@@ -22,7 +22,11 @@ shards:
 
   geo:
     git: https://github.com/geocrystal/geo.git
-    version: 0.7.1
+    version: 0.7.3
+
+  geo_bearing:
+    git: https://github.com/geocrystal/geo_bearing.git
+    version: 0.1.0
 
   geohash:
     git: https://github.com/geocrystal/geohash.git
@@ -38,7 +42,7 @@ shards:
 
   http_proxy:
     git: https://github.com/mamantoha/http_proxy.git
-    version: 0.10.1
+    version: 0.10.3
 
   i18n:
     git: https://github.com/crimson-knight/i18n.cr.git
@@ -50,11 +54,11 @@ shards:
 
   jennifer:
     git: https://github.com/imdrasil/jennifer.cr.git
-    version: 0.13.0+git.commit.2d0ba355fb7cd46c2e50df6176716770206686e8
+    version: 0.13.0+git.commit.35694f54f63a663dc3311ec69154d1da05a94245
 
   pg:
     git: https://github.com/will/crystal-pg.git
-    version: 0.27.0
+    version: 0.28.0
 
   sam:
     git: https://github.com/imdrasil/sam.cr.git
