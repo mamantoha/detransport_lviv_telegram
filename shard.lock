@@ -22,7 +22,7 @@ shards:
 
   geo:
     git: https://github.com/geocrystal/geo.git
-    version: 0.7.3
+    version: 0.7.4
 
   geo_bearing:
     git: https://github.com/geocrystal/geo_bearing.git
@@ -34,7 +34,7 @@ shards:
 
   haversine:
     git: https://github.com/geocrystal/haversine.git
-    version: 0.3.1
+    version: 0.4.0
 
   http-client-digest_auth:
     git: https://github.com/mamantoha/http-client-digest_auth.git
