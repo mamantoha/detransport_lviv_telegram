@@ -11,7 +11,7 @@ dependencies:
   crest:
     github: mamantoha/crest
   telegram_bot:
-    github: mamantoha/telegram_bot
+    github: crystal-garage/telegram_bot
     branch: develop
   jennifer:
     github: imdrasil/jennifer.cr
