@@ -74,7 +74,7 @@ shards:
 
   telegram_bot:
     git: https://github.com/crystal-garage/telegram_bot.git
-    version: 0.5.0+git.commit.99199d0109b9d8f59582131df4c5704c00434288
+    version: 0.5.0+git.commit.79fd591151e4e844c2d2a3f533ad9755efc791d2
 
   wordsmith:
     git: https://github.com/luckyframework/wordsmith.git
