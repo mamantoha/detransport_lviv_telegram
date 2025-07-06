@@ -78,5 +78,5 @@ shards:
 
   wordsmith:
     git: https://github.com/luckyframework/wordsmith.git
-    version: 0.4.0
+    version: 0.5.0
 
