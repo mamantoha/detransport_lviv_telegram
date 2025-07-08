@@ -77,7 +77,6 @@ module DetransportTelegram
 
       buttons = build_keyboard_for_nearest_stops(nearest_stops, location)
 
-      # Add delete button
       buttons << [
         TelegramBot::InlineKeyboardButton.new(
           text: "🗑 #{I18n.translate("messages.delete_message")}",

@@ -19,21 +19,17 @@ module DetransportTelegram
         return unless callback_data
 
         if callback_data.starts_with?("update_")
-          # Handle update request
           stop_id = callback_data.sub("update_", "").to_i
           handle_update_routes(chat_id, stop_id)
         elsif callback_data.starts_with?("map_")
-          # Handle map request
           stop_id = callback_data.sub("map_", "").to_i
           handle_show_on_map(chat_id, stop_id)
         elsif callback_data.starts_with?("route_")
-          # Handle route selection
           parts = callback_data.split("_")
           stop_id = parts[1].to_i
           route_id = parts[2].to_i
           handle_route_selection(chat_id, stop_id, route_id)
         elsif callback_data.starts_with?("delete_")
-          # Handle delete requests
           if callback_data.starts_with?("delete_stop_")
             stop_id = callback_data.sub("delete_stop_", "").to_i
             handle_delete_stop_message(chat_id, stop_id)
@@ -46,7 +42,6 @@ module DetransportTelegram
             handle_delete_nearest_message(chat_id)
           end
         else
-          # Handle regular stop selection
           stop_id = callback_data.to_i
           handle_stop_selection(chat_id, stop_id)
         end
@@ -63,9 +58,7 @@ module DetransportTelegram
     end
 
     private def handle_update_routes(chat_id : Int64, stop_id : Int32)
-      # Find the message to update
       if message = @callback_query.message
-        # Update the existing message with fresh data
         bot.edit_message_text(
           chat_id: chat_id,
           message_id: message.message_id,
@@ -130,7 +123,6 @@ module DetransportTelegram
           end
         end.to_s
 
-        # Create keyboard with route link and delete buttons
         buttons = [
           [
             TelegramBot::InlineKeyboardButton.new(
@@ -152,14 +144,12 @@ module DetransportTelegram
     end
 
     private def handle_delete_stop_message(chat_id : Int64, stop_id : Int32)
-      # Find the message to delete
       if message = @callback_query.message
         bot.delete_message(chat_id, message.message_id)
       end
     end
 
     private def handle_delete_route_message(chat_id : Int64, route_id : Int32)
-      # Find the message to delete
       if message = @callback_query.message
         bot.delete_message(chat_id, message.message_id)
       end
