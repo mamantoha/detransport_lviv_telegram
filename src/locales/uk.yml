@@ -23,3 +23,10 @@ messages:
   show_stop_on_map: Показати зупинку на карті
   update_routes: Оновити розклад
   last_updated: Останнє оновлення
+  arrival_time: Час прибуття
+  data_source: Джерело даних
+  gps_enabled: GPS увімкнено
+  accessible: Доступний для інвалідів
+  wifi_available: Wi-Fi доступний
+  view_on_eway: Переглянути на eWay
+  delete_message: Видалити повідомлення
