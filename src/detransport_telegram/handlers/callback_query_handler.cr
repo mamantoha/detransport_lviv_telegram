@@ -32,6 +32,15 @@ module DetransportTelegram
           stop_id = parts[1].to_i
           route_id = parts[2].to_i
           handle_route_selection(chat_id, stop_id, route_id)
+        elsif callback_data.starts_with?("delete_")
+          # Handle delete requests
+          if callback_data.starts_with?("delete_stop_")
+            stop_id = callback_data.sub("delete_stop_", "").to_i
+            handle_delete_stop_message(chat_id, stop_id)
+          elsif callback_data.starts_with?("delete_route_")
+            route_id = callback_data.sub("delete_route_", "").to_i
+            handle_delete_route_message(chat_id, route_id)
+          end
         else
           # Handle regular stop selection
           stop_id = callback_data.to_i
@@ -106,7 +115,7 @@ module DetransportTelegram
           end
         end.to_s
 
-        # Create keyboard with route link button
+        # Create keyboard with route link and delete buttons
         buttons = [
           [
             TelegramBot::InlineKeyboardButton.new(
@@ -114,10 +123,30 @@ module DetransportTelegram
               url: "https://www.eway.in.ua/ua/cities/lviv/routes/#{route_id}"
             ),
           ],
+          [
+            TelegramBot::InlineKeyboardButton.new(
+              text: "🗑 #{I18n.translate("messages.delete_message")}",
+              callback_data: "delete_route_#{route_id}"
+            ),
+          ],
         ]
         keyboard = TelegramBot::InlineKeyboardMarkup.new(buttons)
 
         bot.send_message(chat_id, text, parse_mode: "Markdown", reply_markup: keyboard)
+      end
+    end
+
+    private def handle_delete_stop_message(chat_id : Int64, stop_id : Int32)
+      # Find the message to delete
+      if message = @callback_query.message
+        bot.delete_message(chat_id, message.message_id)
+      end
+    end
+
+    private def handle_delete_route_message(chat_id : Int64, route_id : Int32)
+      # Find the message to delete
+      if message = @callback_query.message
+        bot.delete_message(chat_id, message.message_id)
       end
     end
 
@@ -143,6 +172,12 @@ module DetransportTelegram
         TelegramBot::InlineKeyboardButton.new(
           text: "🗺 #{I18n.translate("messages.show_stop_on_map")}",
           callback_data: "map_#{stop_id}"
+        ),
+      ]
+      buttons << [
+        TelegramBot::InlineKeyboardButton.new(
+          text: "🗑 #{I18n.translate("messages.delete_message")}",
+          callback_data: "delete_stop_#{stop_id}"
         ),
       ]
 
