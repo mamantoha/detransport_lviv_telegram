@@ -181,8 +181,10 @@ module DetransportTelegram
 
       buttons = [] of Array(TelegramBot::InlineKeyboardButton)
 
+      routes = lad_routes.routes.sort_by(&.time_left.to_f)
+
       # Add route buttons
-      lad_routes.routes.each_with_index do |route, index|
+      routes.each_with_index do |route, index|
         button_text = "#{route.transport_icon} #{route.title} (#{route.direction_title}) - #{route.time_left_formatted}"
         callback_data = "route_#{stop_id}_#{route.id}"
         buttons << [TelegramBot::InlineKeyboardButton.new(text: button_text, callback_data: callback_data)]
