@@ -14,14 +14,55 @@ module DetransportTelegram
       if chat_id = @chat_id
         bot.answer_callback_query(@callback_query.id, cache_time: 1)
 
-        stop_id = @callback_query.data
+        callback_data = @callback_query.data
 
-        return unless stop_id
-        stop_id = stop_id.to_i
+        return unless callback_data
 
-        keyboard = TelegramBot::ReplyKeyboardRemove.new
-        bot.send_message(chat_id, routes_text(stop_id), parse_mode: "Markdown", reply_markup: keyboard)
+        if callback_data.starts_with?("update_")
+          # Handle update request
+          stop_id = callback_data.sub("update_", "").to_i
+          handle_update_routes(chat_id, stop_id)
+        else
+          # Handle regular stop selection
+          stop_id = callback_data.to_i
+          handle_stop_selection(chat_id, stop_id)
+        end
       end
+    end
+
+    private def handle_stop_selection(chat_id : Int64, stop_id : Int32)
+      bot.send_message(
+        chat_id: chat_id,
+        text: routes_text(stop_id),
+        parse_mode: "Markdown",
+        reply_markup: update_keyboard(stop_id)
+      )
+    end
+
+    private def handle_update_routes(chat_id : Int64, stop_id : Int32)
+      # Find the message to update
+      if message = @callback_query.message
+        # Update the existing message with fresh data
+        bot.edit_message_text(
+          chat_id: chat_id,
+          message_id: message.message_id,
+          text: routes_text(stop_id),
+          parse_mode: "Markdown",
+          reply_markup: update_keyboard(stop_id)
+        )
+      end
+    end
+
+    private def update_keyboard(stop_id : Int32)
+      buttons = [
+        [
+          TelegramBot::InlineKeyboardButton.new(
+            text: "🔄 #{I18n.translate("messages.update_routes")}",
+            callback_data: "update_#{stop_id}"
+          ),
+        ],
+      ]
+      TelegramBot::InlineKeyboardMarkup.new(buttons)
     end
 
     private def routes_text(stop_id : Int32)
