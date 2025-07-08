@@ -76,6 +76,15 @@ module DetransportTelegram
       nearest_stops = stops.nearest_to(location.latitude, location.longitude)
 
       buttons = build_keyboard_for_nearest_stops(nearest_stops, location)
+
+      # Add delete button
+      buttons << [
+        TelegramBot::InlineKeyboardButton.new(
+          text: "🗑 #{I18n.translate("messages.delete_message")}",
+          callback_data: "delete_nearest_#{location.latitude}_#{location.longitude}"
+        ),
+      ]
+
       keyboard = TelegramBot::InlineKeyboardMarkup.new(buttons)
 
       bot.send_message(chat_id, text, reply_markup: keyboard)
