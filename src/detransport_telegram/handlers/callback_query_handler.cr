@@ -40,6 +40,8 @@ module DetransportTelegram
           elsif callback_data.starts_with?("delete_route_")
             route_id = callback_data.sub("delete_route_", "").to_i
             handle_delete_route_message(chat_id, route_id)
+          elsif callback_data.starts_with?("delete_map_")
+            handle_delete_map_message(chat_id)
           end
         else
           # Handle regular stop selection
@@ -77,12 +79,23 @@ module DetransportTelegram
       if stop = stops.get_by_id(stop_id)
         coord = Geo::Coord.new(stop.latitude, stop.longitude)
 
+        buttons = [
+          [
+            TelegramBot::InlineKeyboardButton.new(
+              text: "🗑 #{I18n.translate("messages.delete_message")}",
+              callback_data: "delete_map_#{stop_id}"
+            ),
+          ],
+        ]
+        keyboard = TelegramBot::InlineKeyboardMarkup.new(buttons)
+
         bot.send_venue(
           chat_id,
           latitude: stop.latitude,
           longitude: stop.longitude,
           title: stop.full_name,
-          address: "\n🧭 #{coord}"
+          address: "\n🧭 #{coord}",
+          reply_markup: keyboard
         )
       end
     end
@@ -98,7 +111,7 @@ module DetransportTelegram
 
         text = String::Builder.build do |io|
           io << "🚏 `#{stop_title}`" << "\n"
-          io << "🚌 `#{route.transport_name} #{route.title}`" << "\n"
+          io << "#{route.transport_icon} `#{route.transport_name} #{route.title}`" << "\n"
           io << "📍 `#{route.direction_title}`" << "\n"
           io << "\n"
           io << "⏰ #{I18n.translate("messages.arrival_time")}: *#{route.time_left_formatted}*" << "\n"
@@ -145,6 +158,12 @@ module DetransportTelegram
 
     private def handle_delete_route_message(chat_id : Int64, route_id : Int32)
       # Find the message to delete
+      if message = @callback_query.message
+        bot.delete_message(chat_id, message.message_id)
+      end
+    end
+
+    private def handle_delete_map_message(chat_id : Int64)
       if message = @callback_query.message
         bot.delete_message(chat_id, message.message_id)
       end
