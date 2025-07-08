@@ -14,3 +14,4 @@ messages:
   share_location: Share location
   show_stop_on_map: Show bus stop on the map
   update_routes: Update schedule
+  last_updated: Last updated

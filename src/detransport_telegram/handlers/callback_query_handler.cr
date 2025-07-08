@@ -77,11 +77,16 @@ module DetransportTelegram
         arry << route.full_title
       end
 
+      current_time = Time.local(Time::Location.load("Europe/Kyiv"))
+      formatted_time = current_time.to_s("%Y-%m-%d %H:%M:%S")
+
       String::Builder.build do |io|
         io << "🚏 `#{stop_title}`" << "\n"
         io << "#{I18n.translate("messages.show_stop_on_map")}: /#{stop_id}" << "\n"
         io << "\n"
         routes.each { |el| io << el << "\n" }
+        io << "\n"
+        io << "_#{I18n.translate("messages.last_updated")}: #{formatted_time}_"
       end.to_s
     end
   end
