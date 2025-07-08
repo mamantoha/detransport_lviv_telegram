@@ -26,6 +26,12 @@ module DetransportTelegram
           # Handle map request
           stop_id = callback_data.sub("map_", "").to_i
           handle_show_on_map(chat_id, stop_id)
+        elsif callback_data.starts_with?("route_")
+          # Handle route selection
+          parts = callback_data.split("_")
+          stop_id = parts[1].to_i
+          route_id = parts[2].to_i
+          handle_route_selection(chat_id, stop_id, route_id)
         else
           # Handle regular stop selection
           stop_id = callback_data.to_i
@@ -72,19 +78,74 @@ module DetransportTelegram
       end
     end
 
+    private def handle_route_selection(chat_id : Int64, stop_id : Int32, route_id : Int32)
+      lad_api = DetransportTelegram::LadAPI.new
+      lad_routes = lad_api.show_routes(stop_id)
+
+      if route = lad_routes.routes.find { |r| r.id == route_id }
+        stops = DetransportTelegram::Bot.stops
+        stop = stops.get_by_id(stop_id)
+        stop_title = stop.try(&.full_name) || lad_routes.title
+
+        text = String::Builder.build do |io|
+          io << "🚏 `#{stop_title}`" << "\n"
+          io << "🚌 `#{route.transport_name} #{route.title}`" << "\n"
+          io << "📍 `#{route.direction_title}`" << "\n"
+          io << "\n"
+          io << "⏰ #{I18n.translate("messages.arrival_time")}: *#{route.time_left_formatted}*" << "\n"
+          io << "📡 #{I18n.translate("messages.data_source")}: `#{route.time_source}`" << "\n"
+          io << "\n"
+          if route.has_gps?
+            io << "📍 #{I18n.translate("messages.gps_enabled")}" << "\n"
+          end
+          if route.handicapped?
+            io << "♿ #{I18n.translate("messages.accessible")}" << "\n"
+          end
+          if route.wifi?
+            io << "📶 #{I18n.translate("messages.wifi_available")}" << "\n"
+          end
+        end.to_s
+
+        # Create keyboard with route link button
+        buttons = [
+          [
+            TelegramBot::InlineKeyboardButton.new(
+              text: "🌐 #{I18n.translate("messages.view_on_eway")}",
+              url: "https://www.eway.in.ua/ua/cities/lviv/routes/#{route_id}"
+            ),
+          ],
+        ]
+        keyboard = TelegramBot::InlineKeyboardMarkup.new(buttons)
+
+        bot.send_message(chat_id, text, parse_mode: "Markdown", reply_markup: keyboard)
+      end
+    end
+
     private def update_keyboard(stop_id : Int32)
-      buttons = [
-        [
-          TelegramBot::InlineKeyboardButton.new(
-            text: "🔄 #{I18n.translate("messages.update_routes")}",
-            callback_data: "update_#{stop_id}"
-          ),
-          TelegramBot::InlineKeyboardButton.new(
-            text: "🗺 #{I18n.translate("messages.show_stop_on_map")}",
-            callback_data: "map_#{stop_id}"
-          ),
-        ],
+      lad_api = DetransportTelegram::LadAPI.new
+      lad_routes = lad_api.show_routes(stop_id)
+
+      buttons = [] of Array(TelegramBot::InlineKeyboardButton)
+
+      # Add route buttons
+      lad_routes.routes.each_with_index do |route, index|
+        button_text = "#{route.transport_icon} #{route.title} (#{route.direction_title}) - #{route.time_left_formatted}"
+        callback_data = "route_#{stop_id}_#{route.id}"
+        buttons << [TelegramBot::InlineKeyboardButton.new(text: button_text, callback_data: callback_data)]
+      end
+
+      # Add action buttons
+      buttons << [
+        TelegramBot::InlineKeyboardButton.new(
+          text: "🔄 #{I18n.translate("messages.update_routes")}",
+          callback_data: "update_#{stop_id}"
+        ),
+        TelegramBot::InlineKeyboardButton.new(
+          text: "🗺 #{I18n.translate("messages.show_stop_on_map")}",
+          callback_data: "map_#{stop_id}"
+        ),
       ]
+
       TelegramBot::InlineKeyboardMarkup.new(buttons)
     end
 
@@ -96,17 +157,11 @@ module DetransportTelegram
       stop = stops.get_by_id(stop_id)
       stop_title = stop.try(&.full_name) || lad_routes.title
 
-      routes = lad_routes.routes.reduce([] of String) do |arry, route|
-        arry << route.full_title
-      end
-
       current_time = Time.local(Time::Location.load("Europe/Kyiv"))
       formatted_time = current_time.to_s("%Y-%m-%d %H:%M:%S")
 
       String::Builder.build do |io|
         io << "🚏 `#{stop_title}`" << "\n"
-        io << "\n"
-        routes.each { |el| io << el << "\n" }
         io << "\n"
         io << "_#{I18n.translate("messages.last_updated")}: #{formatted_time}_"
       end.to_s

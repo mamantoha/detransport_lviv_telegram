@@ -15,3 +15,9 @@ messages:
   show_stop_on_map: Show bus stop on the map
   update_routes: Update schedule
   last_updated: Last updated
+  arrival_time: Arrival time
+  data_source: Data source
+  gps_enabled: GPS enabled
+  accessible: Wheelchair accessible
+  wifi_available: Wi-Fi available
+  view_on_eway: View on eWay
