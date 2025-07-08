@@ -53,6 +53,15 @@ module DetransportTelegram
         bot.send_message(chat_id, text)
       else
         buttons = build_keyboard_for_similar_stops(similar_stops)
+
+        # Add delete button
+        buttons << [
+          TelegramBot::InlineKeyboardButton.new(
+            text: "🗑 #{I18n.translate("messages.delete_message")}",
+            callback_data: "delete_similar_#{stop}"
+          ),
+        ]
+
         keyboard = TelegramBot::InlineKeyboardMarkup.new(buttons)
 
         text = I18n.translate("messages.select_stop")

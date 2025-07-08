@@ -40,6 +40,8 @@ module DetransportTelegram
             handle_delete_map_message(chat_id)
           elsif callback_data.starts_with?("delete_nearest_")
             handle_delete_nearest_message(chat_id)
+          elsif callback_data.starts_with?("delete_similar_")
+            handle_delete_similar_message(chat_id)
           end
         else
           stop_id = callback_data.to_i
@@ -162,6 +164,12 @@ module DetransportTelegram
     end
 
     private def handle_delete_nearest_message(chat_id : Int64)
+      if message = @callback_query.message
+        bot.delete_message(chat_id, message.message_id)
+      end
+    end
+
+    private def handle_delete_similar_message(chat_id : Int64)
       if message = @callback_query.message
         bot.delete_message(chat_id, message.message_id)
       end
