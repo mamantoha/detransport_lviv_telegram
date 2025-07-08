@@ -26,7 +26,7 @@ messages:
   arrival_time: Час прибуття
   data_source: Джерело даних
   gps_enabled: GPS увімкнено
-  accessible: Доступний для інвалідів
+  accessible: Доступний для людей з інвалідністю
   wifi_available: Wi-Fi доступний
   view_on_eway: Переглянути на eWay
   delete_message: Видалити повідомлення
