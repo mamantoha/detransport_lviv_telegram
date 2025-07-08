@@ -22,6 +22,10 @@ module DetransportTelegram
           # Handle update request
           stop_id = callback_data.sub("update_", "").to_i
           handle_update_routes(chat_id, stop_id)
+        elsif callback_data.starts_with?("map_")
+          # Handle map request
+          stop_id = callback_data.sub("map_", "").to_i
+          handle_show_on_map(chat_id, stop_id)
         else
           # Handle regular stop selection
           stop_id = callback_data.to_i
@@ -53,12 +57,31 @@ module DetransportTelegram
       end
     end
 
+    private def handle_show_on_map(chat_id : Int64, stop_id : Int32)
+      stops = DetransportTelegram::Bot.stops
+      if stop = stops.get_by_id(stop_id)
+        coord = Geo::Coord.new(stop.latitude, stop.longitude)
+
+        bot.send_venue(
+          chat_id,
+          latitude: stop.latitude,
+          longitude: stop.longitude,
+          title: stop.full_name,
+          address: "\n🧭 #{coord}"
+        )
+      end
+    end
+
     private def update_keyboard(stop_id : Int32)
       buttons = [
         [
           TelegramBot::InlineKeyboardButton.new(
             text: "🔄 #{I18n.translate("messages.update_routes")}",
             callback_data: "update_#{stop_id}"
+          ),
+          TelegramBot::InlineKeyboardButton.new(
+            text: "🗺 #{I18n.translate("messages.show_stop_on_map")}",
+            callback_data: "map_#{stop_id}"
           ),
         ],
       ]
@@ -82,7 +105,6 @@ module DetransportTelegram
 
       String::Builder.build do |io|
         io << "🚏 `#{stop_title}`" << "\n"
-        io << "#{I18n.translate("messages.show_stop_on_map")}: /#{stop_id}" << "\n"
         io << "\n"
         routes.each { |el| io << el << "\n" }
         io << "\n"

@@ -32,11 +32,6 @@ module DetransportTelegram
         handle_about
       when /^\/ping/
         bot.reply(message, "🏓")
-      when /^\/(\d+)/
-        if m = text.match(/^\/(\d+)/)
-          stop_id = m[1].to_i
-          handle_stop_location(stop_id)
-        end
       else
         nil
       end
@@ -102,21 +97,6 @@ module DetransportTelegram
       keyboard = TelegramBot::ReplyKeyboardMarkup.new(buttons, resize_keyboard: true)
 
       bot.send_message(chat_id, text, reply_markup: keyboard, parse_mode: "Markdown")
-    end
-
-    private def handle_stop_location(stop_id : Int32)
-      stops = DetransportTelegram::Bot.stops
-      if stop = stops.get_by_id(stop_id)
-        coord = Geo::Coord.new(stop.latitude, stop.longitude)
-
-        bot.send_venue(
-          chat_id,
-          latitude: stop.latitude,
-          longitude: stop.longitude,
-          title: stop.full_name,
-          address: "\n🧭 #{coord}"
-        )
-      end
     end
 
     private def build_keyboard_for_nearest_stops(stops : Array(DetransportTelegram::Stop), location : TelegramBot::Location)
