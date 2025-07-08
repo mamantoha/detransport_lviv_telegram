@@ -1,7 +1,7 @@
 messages:
   select_stop: Select a stop
   nearest_stops: Nearest stops
-  stops_not_found: ⚠️ Sorry, but no stop was found for your request. Please try another option.
+  stops_not_found: Sorry, but no stop was found for your request. Please try another option.
   help: "*Telegram Bot for Lviv citizens and city guests.*
 
 
@@ -11,5 +11,6 @@ messages:
     - Send any message to list bus stations etc.
 
     - Send current location to locate the closest bus stop."
-  share_location: 📍 Share location
+  share_location: Share location
   show_stop_on_map: Show bus stop on the map
+  update_routes: Update schedule

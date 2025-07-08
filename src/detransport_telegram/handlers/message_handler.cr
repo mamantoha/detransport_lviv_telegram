@@ -54,7 +54,7 @@ module DetransportTelegram
       similar_stops = stops.similar_to(stop)
 
       if similar_stops.empty?
-        text = I18n.translate("messages.stops_not_found")
+        text = "⚠️ #{I18n.translate("messages.stops_not_found")}"
         bot.send_message(chat_id, text)
       else
         buttons = build_keyboard_for_similar_stops(similar_stops)
@@ -91,7 +91,11 @@ module DetransportTelegram
 
       buttons = [
         [
-          TelegramBot::KeyboardButton.new(I18n.translate("messages.share_location"), request_contact: false, request_location: true),
+          TelegramBot::KeyboardButton.new(
+            "📍 #{I18n.translate("messages.share_location")}",
+            request_contact: false,
+            request_location: true
+          ),
         ],
       ]
 
