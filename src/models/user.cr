@@ -1,14 +1,13 @@
-class User < ApplicationRecord
-  with_timestamps
+class User
+  include Clear::Model
 
-  mapping(
-    id: Primary64,
-    telegram_id: Int64,
-    first_name: String,
-    last_name: String?,
-    username: String?,
-    language_code: String?,
-    created_at: Time?,
-    updated_at: Time?,
-  )
+  primary_key
+
+  column telegram_id : Int64
+  column first_name : String
+  column last_name : String?
+  column username : String?
+  column language_code : String?
+
+  timestamps
 end
