@@ -29,20 +29,8 @@ module DetransportTelegram
           stop_id = parts[1].to_i
           route_id = parts[2].to_i
           handle_route_selection(chat_id, stop_id, route_id)
-        elsif callback_data.starts_with?("delete_")
-          if callback_data.starts_with?("delete_stop_")
-            stop_id = callback_data.sub("delete_stop_", "").to_i
-            handle_delete_stop_message(chat_id, stop_id)
-          elsif callback_data.starts_with?("delete_route_")
-            route_id = callback_data.sub("delete_route_", "").to_i
-            handle_delete_route_message(chat_id, route_id)
-          elsif callback_data.starts_with?("delete_map_")
-            handle_delete_map_message(chat_id)
-          elsif callback_data.starts_with?("delete_nearest_")
-            handle_delete_nearest_message(chat_id)
-          elsif callback_data.starts_with?("delete_similar_")
-            handle_delete_similar_message(chat_id)
-          end
+        elsif callback_data == "delete_message"
+          handle_delete_message(chat_id)
         else
           stop_id = callback_data.to_i
           handle_stop_selection(chat_id, stop_id)
@@ -80,7 +68,7 @@ module DetransportTelegram
           [
             TelegramBot::InlineKeyboardButton.new(
               text: "🗑 #{I18n.translate("messages.delete_message")}",
-              callback_data: "delete_map_#{stop_id}"
+              callback_data: "delete_message"
             ),
           ],
         ]
@@ -135,7 +123,7 @@ module DetransportTelegram
           [
             TelegramBot::InlineKeyboardButton.new(
               text: "🗑 #{I18n.translate("messages.delete_message")}",
-              callback_data: "delete_route_#{route_id}"
+              callback_data: "delete_message"
             ),
           ],
         ]
@@ -145,31 +133,7 @@ module DetransportTelegram
       end
     end
 
-    private def handle_delete_stop_message(chat_id : Int64, stop_id : Int32)
-      if message = @callback_query.message
-        bot.delete_message(chat_id, message.message_id)
-      end
-    end
-
-    private def handle_delete_route_message(chat_id : Int64, route_id : Int32)
-      if message = @callback_query.message
-        bot.delete_message(chat_id, message.message_id)
-      end
-    end
-
-    private def handle_delete_map_message(chat_id : Int64)
-      if message = @callback_query.message
-        bot.delete_message(chat_id, message.message_id)
-      end
-    end
-
-    private def handle_delete_nearest_message(chat_id : Int64)
-      if message = @callback_query.message
-        bot.delete_message(chat_id, message.message_id)
-      end
-    end
-
-    private def handle_delete_similar_message(chat_id : Int64)
+    private def handle_delete_message(chat_id : Int64)
       if message = @callback_query.message
         bot.delete_message(chat_id, message.message_id)
       end
@@ -204,7 +168,7 @@ module DetransportTelegram
       buttons << [
         TelegramBot::InlineKeyboardButton.new(
           text: "🗑 #{I18n.translate("messages.delete_message")}",
-          callback_data: "delete_stop_#{stop_id}"
+          callback_data: "delete_message"
         ),
       ]
 

@@ -54,11 +54,10 @@ module DetransportTelegram
       else
         buttons = build_keyboard_for_similar_stops(similar_stops)
 
-        # Add delete button
         buttons << [
           TelegramBot::InlineKeyboardButton.new(
             text: "🗑 #{I18n.translate("messages.delete_message")}",
-            callback_data: "delete_similar_#{stop}"
+            callback_data: "delete_message"
           ),
         ]
 
@@ -89,7 +88,7 @@ module DetransportTelegram
       buttons << [
         TelegramBot::InlineKeyboardButton.new(
           text: "🗑 #{I18n.translate("messages.delete_message")}",
-          callback_data: "delete_nearest_#{location.latitude}_#{location.longitude}"
+          callback_data: "delete_message"
         ),
       ]
 
