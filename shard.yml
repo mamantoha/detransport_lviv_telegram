@@ -24,6 +24,8 @@ dependencies:
     github: geocrystal/geo
   fuzzy_match:
     github: acoustep/fuzzy_match.cr
+  humanize_time:
+    github: mamantoha/humanize_time
 
 authors:
   - Anton Maminov <anton.maminov@gmail.com>

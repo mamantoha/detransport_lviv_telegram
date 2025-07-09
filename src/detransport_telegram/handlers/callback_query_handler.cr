@@ -99,7 +99,7 @@ module DetransportTelegram
           io << "#{route.transport_icon} `#{route.transport_name} #{route.title}`" << "\n"
           io << "📍 `#{route.direction_title}`" << "\n"
           io << "\n"
-          io << "⏰ #{I18n.translate("messages.arrival_time")}: *#{route.time_left_formatted}*" << "\n"
+          io << "⏰ #{I18n.translate("messages.arrival_time")}: *#{route.time_left_humanized}*" << "\n"
           io << "📡 #{I18n.translate("messages.data_source")}: `#{route.time_source}`" << "\n"
           io << "\n"
           if route.has_gps?
@@ -149,7 +149,7 @@ module DetransportTelegram
 
       # Add route buttons
       routes.each_with_index do |route, index|
-        button_text = "#{route.transport_icon} #{route.title} (#{route.direction_title}) - #{route.time_left_formatted}"
+        button_text = "#{route.transport_icon} #{route.title} (#{route.direction_title}) - #{route.time_left_humanized}"
         callback_data = "route_#{stop_id}_#{route.id}"
         buttons << [TelegramBot::InlineKeyboardButton.new(text: button_text, callback_data: callback_data)]
       end

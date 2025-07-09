@@ -11,6 +11,7 @@ require "geo"
 require "crest"
 require "fuzzy_match"
 require "i18n"
+require "humanize_time"
 require "./detransport_telegram/*"
 
 require "../config/config"

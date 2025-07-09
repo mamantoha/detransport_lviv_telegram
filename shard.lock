@@ -60,6 +60,10 @@ shards:
     git: https://github.com/mamantoha/http_proxy.git
     version: 0.13.0
 
+  humanize_time:
+    git: https://github.com/mamantoha/humanize_time.git
+    version: 0.12.5
+
   i18n:
     git: https://github.com/crystal-i18n/i18n.git
     version: 0.2.2

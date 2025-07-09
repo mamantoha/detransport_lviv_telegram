@@ -89,6 +89,14 @@ module DetransportTelegram
           "🚌"
         end
       end
+
+      def time_left_humanized
+        HumanizeTime.distance_of_time_in_words(
+          Time.local,
+          Time.local + time_left.to_f.minutes,
+          include_seconds: true
+        )
+      end
     end
   end
 end
