@@ -13,13 +13,12 @@ require "fuzzy_match"
 require "i18n"
 require "./detransport_telegram/*"
 
-require "../config/initializers/database"
+require "../config/config"
 require "./models/*"
 
-I18n::Backend::Yaml.embed(["#{__DIR__}/locales"])
+I18n.config.loaders << I18n::Loader::YAML.embed("#{__DIR__}/locales")
+I18n.config.default_locale = "uk"
 I18n.init
-
-I18n.default_locale = "uk"
 
 module DetransportTelegram
   VERSION = "0.1.0"

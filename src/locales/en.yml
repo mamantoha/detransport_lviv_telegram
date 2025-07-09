@@ -1,24 +1,25 @@
-messages:
-  select_stop: Select a stop
-  nearest_stops: Nearest stops
-  stops_not_found: Sorry, but no stop was found for your request. Please try another option.
-  help: "*Telegram Bot for Lviv citizens and city guests.*
+en:
+  messages:
+    select_stop: Select a stop
+    nearest_stops: Nearest stops
+    stops_not_found: Sorry, but no stop was found for your request. Please try another option.
+    help: "*Telegram Bot for Lviv citizens and city guests.*
 
 
-    Helps them easily navigate public transport system.
-    The bot features real time schedule of public transport.
+      Helps them easily navigate public transport system.
+      The bot features real time schedule of public transport.
 
-    - Send any message to list bus stations etc.
+      - Send any message to list bus stations etc.
 
-    - Send current location to locate the closest bus stop."
-  share_location: Share location
-  show_stop_on_map: Show bus stop on the map
-  update_routes: Update schedule
-  last_updated: Last updated
-  arrival_time: Arrival time
-  data_source: Data source
-  gps_enabled: GPS enabled
-  accessible: Wheelchair accessible
-  wifi_available: Wi-Fi available
-  view_on_eway: View on eWay
-  delete_message: Delete message
+      - Send current location to locate the closest bus stop."
+    share_location: Share location
+    show_stop_on_map: Show bus stop on the map
+    update_routes: Update schedule
+    last_updated: Last updated
+    arrival_time: Arrival time
+    data_source: Data source
+    gps_enabled: GPS enabled
+    accessible: Wheelchair accessible
+    wifi_available: Wi-Fi available
+    view_on_eway: View on eWay
+    delete_message: Delete message

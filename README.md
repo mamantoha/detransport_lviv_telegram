@@ -40,11 +40,19 @@ shards build --release --production
 
 ## Development
 
+```
+psql -c 'DROP DATABASE IF EXISTS detransport_lviv_development;' -U postgres
+psql -c 'CREATE DATABASE detransport_lviv_development;' -U postgres
+```
+
 ### DB Migration
 
 ```console
-$ crystal sam.cr generate:migration ChangeUserId
-./db/migrations/20220709130450248_change_user_id.cr was successfully created.
+crystal src/db.cr generate migration add_field_to_table
+```
+
+```crystal
+crystal ./src/db.cr migrate
 ```
 
 ### Update stops

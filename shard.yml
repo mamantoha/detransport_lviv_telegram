@@ -13,13 +13,13 @@ dependencies:
   telegram_bot:
     github: crystal-garage/telegram_bot
     branch: develop
-  jennifer:
-    github: imdrasil/jennifer.cr
-    branch: master
+  clear:
+    github: crystal-garage/clear
+    branch: develop
   pg:
     github: will/crystal-pg
-  sam:
-    github: imdrasil/sam.cr
+  i18n:
+    github: crystal-i18n/i18n
   geo:
     github: geocrystal/geo
   fuzzy_match:
