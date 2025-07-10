@@ -18,18 +18,18 @@ module DetransportTelegram
 
         return unless callback_data
 
-        if callback_data.starts_with?("update_")
-          stop_id = callback_data.sub("update_", "").to_i
+        case callback_data
+        when /^update_(\d+)$/
+          stop_id = $1.to_i
           handle_update_routes(chat_id, stop_id)
-        elsif callback_data.starts_with?("map_")
-          stop_id = callback_data.sub("map_", "").to_i
+        when /^map_(\d+)$/
+          stop_id = $1.to_i
           handle_show_on_map(chat_id, stop_id)
-        elsif callback_data.starts_with?("route_")
-          parts = callback_data.split("_")
-          stop_id = parts[1].to_i
-          route_id = parts[2].to_i
+        when /^route_(\d+)_(\d+)$/
+          stop_id = $1.to_i
+          route_id = $2.to_i
           handle_route_selection(chat_id, stop_id, route_id)
-        elsif callback_data == "delete_message"
+        when "delete_message"
           handle_delete_message(chat_id)
         else
           stop_id = callback_data.to_i
