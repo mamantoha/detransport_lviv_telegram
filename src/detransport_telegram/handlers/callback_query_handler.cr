@@ -154,17 +154,24 @@ module DetransportTelegram
         buttons << [TelegramBot::InlineKeyboardButton.new(text: button_text, callback_data: callback_data)]
       end
 
-      # Add action buttons
       buttons << [
         TelegramBot::InlineKeyboardButton.new(
           text: "🔄 #{I18n.translate("messages.update_routes")}",
           callback_data: "update_#{stop_id}"
         ),
+      ]
+
+      buttons << [
         TelegramBot::InlineKeyboardButton.new(
           text: "🗺 #{I18n.translate("messages.show_stop_on_map")}",
           callback_data: "map_#{stop_id}"
         ),
+        TelegramBot::InlineKeyboardButton.new(
+          text: "🌐 #{I18n.translate("messages.view_on_eway")}",
+          url: "https://www.eway.in.ua/ua/cities/lviv/stops/#{stop_id}"
+        ),
       ]
+
       buttons << [
         TelegramBot::InlineKeyboardButton.new(
           text: "🗑 #{I18n.translate("messages.delete_message")}",
