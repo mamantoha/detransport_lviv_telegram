@@ -14,6 +14,9 @@ module DetransportTelegram
       elsif message_location = message.location
         handle_location(message_location)
       end
+
+      # Delete the user's message after processing
+      bot.delete_message(chat_id, message.message_id)
     end
 
     private def handle_text(message, text : String)
