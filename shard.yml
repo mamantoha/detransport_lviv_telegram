@@ -13,8 +13,8 @@ dependencies:
   telegram_bot:
     github: crystal-garage/telegram_bot
     branch: develop
-  clear:
-    github: crystal-garage/clear
+  lustra:
+    github: crystal-garage/lustra
     branch: develop
   pg:
     github: will/crystal-pg
