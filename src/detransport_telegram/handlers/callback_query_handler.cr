@@ -89,7 +89,7 @@ module DetransportTelegram
       lad_api = DetransportTelegram::LadAPI.new
       lad_routes = lad_api.show_routes(stop_id)
 
-      if route = lad_routes.routes.find { |r| r.id == route_id }
+      if route = lad_routes.routes.find(&.id.== route_id)
         stops = DetransportTelegram::Bot.stops
         stop = stops.get_by_id(stop_id)
         stop_title = stop.try(&.full_name) || lad_routes.title

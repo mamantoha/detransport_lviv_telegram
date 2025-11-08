@@ -38,7 +38,6 @@ module DetransportTelegram
       when /^\/ping/
         bot.reply(message, "🏓")
       else
-        nil
       end
     end
 
