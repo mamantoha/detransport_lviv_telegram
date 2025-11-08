@@ -75,9 +75,9 @@ module DetransportTelegram
 
     private def handle_about
       text = <<-HEREDOC
-      Build with Crystal #{Crystal::VERSION}
-      Build date: #{Time.parse_rfc2822(Config.date).to_s("%Y-%m-%d %H:%M:%S %:z")}
-      HEREDOC
+        Build with Crystal #{Crystal::VERSION}
+        Build date: #{Time.parse_rfc2822(Config.date).to_s("%Y-%m-%d %H:%M:%S %:z")}
+        HEREDOC
 
       bot.send_message(chat_id, text, parse_mode: "Markdown")
     end
