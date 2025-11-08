@@ -85,7 +85,7 @@ module DetransportTelegram
       coordinates = {49.8397, 24.0297}
       sun = SunTimes::SunTime.new(coordinates)
       location = Time::Location.load("Europe/Kyiv")
-      date = Time.local
+      date = Time.local(location)
 
       events = sun.events(date, location)
 
