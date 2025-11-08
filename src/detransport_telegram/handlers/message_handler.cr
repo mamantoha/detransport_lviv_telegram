@@ -33,6 +33,8 @@ module DetransportTelegram
         handle_help
       when /^\/about/
         handle_about
+      when /^\/city/
+        handle_city
       when /^\/ping/
         bot.reply(message, "🏓")
       else
@@ -76,6 +78,24 @@ module DetransportTelegram
       Build with Crystal #{Crystal::VERSION}
       Build date: #{Time.parse_rfc2822(Config.date).to_s("%Y-%m-%d %H:%M:%S %:z")}
       HEREDOC
+
+      bot.send_message(chat_id, text, parse_mode: "Markdown")
+    end
+
+    private def handle_city
+      coordinates = {49.8397, 24.0297}
+      sun = SunTimes::SunTime.new(coordinates)
+      location = Time::Location.load("Europe/Kyiv")
+      date = Time.local
+
+      events = sun.events(date, location)
+
+      text = <<-HEREDOC
+        #{I18n.t("city.current_date")}: #{date.to_s("%Y-%m-%d")}
+        #{I18n.t("city.current_time")}: #{date.to_s("%H:%M:%S")}
+        #{I18n.t("city.sunrise")}: #{events[:sunrise].try(&.to_s("%H:%M:%S"))}
+        #{I18n.t("city.sunset")}: #{events[:sunset].try(&.to_s("%H:%M:%S"))}
+        HEREDOC
 
       bot.send_message(chat_id, text, parse_mode: "Markdown")
     end

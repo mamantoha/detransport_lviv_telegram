@@ -12,6 +12,7 @@ require "crest"
 require "fuzzy_match"
 require "i18n"
 require "humanize_time"
+require "sun_times"
 require "./detransport_telegram/*"
 
 require "../config/config"
@@ -43,6 +44,7 @@ module DetransportTelegram
 
     commands = [
       TelegramBot::BotCommand.new(command: "help", description: "інформація про бота"),
+      TelegramBot::BotCommand.new(command: "city", description: "інформація про місто"),
       TelegramBot::BotCommand.new(command: "ping", description: "pong 🏓"),
       TelegramBot::BotCommand.new(command: "about", description: "🤖"),
     ]

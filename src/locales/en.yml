@@ -5,7 +5,6 @@ en:
     stops_not_found: Sorry, but no stop was found for your request. Please try another option.
     help: "*Telegram Bot for Lviv citizens and city guests.*
 
-
       Helps them easily navigate public transport system.
       The bot features real time schedule of public transport.
 
@@ -23,3 +22,8 @@ en:
     wifi_available: Wi-Fi available
     view_on_eway: View on eWay
     delete_message: Delete message
+  city:
+    current_date: Date
+    current_time: Current time
+    sunrise: Sunrise
+    sunset: Sunset
