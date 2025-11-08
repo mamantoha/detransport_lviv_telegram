@@ -6,7 +6,7 @@ module DetransportTelegram
     end
 
     def get_by_id(stop_id : Int32) : Stop?
-      stops.find { |stop| stop.id == stop_id }
+      stops.find(&.id.== stop_id)
     end
 
     def nearest_to(latitude : Float64, longitude : Float64, count = 5) : Array(Stop)
