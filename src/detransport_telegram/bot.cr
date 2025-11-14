@@ -49,6 +49,7 @@ module DetransportTelegram
 
     def self.stops
       @@stops ||= begin
+        DetransportTelegram::Log.debug { "Loading stops from JSON..." }
         stops_json = File.open("#{__DIR__}/data/lviv_stops.json")
         DetransportTelegram::Stops.new(DetransportTelegram::StopsIterator.from_json(stops_json))
       end
