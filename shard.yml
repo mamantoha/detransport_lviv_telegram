@@ -35,5 +35,7 @@ authors:
 targets:
   detransport_telegram:
     main: src/detransport_telegram.cr
+  db:
+    main: src/db.cr
 
 license: MIT
