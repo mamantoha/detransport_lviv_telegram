@@ -173,7 +173,8 @@ module DetransportTelegram
             io << " (@#{user.username})"
           end
           io << "\n"
-          io << "   📅 #{I18n.translate("admin.updated")}: `#{user.updated_at.try(&.to_s("%Y-%m-%d %H:%M"))} `\n"
+          updated_at = user.updated_at.try { |t| t.in(Config.timezone).to_s("%Y-%m-%d %H:%M") }
+          io << "   📅 #{I18n.translate("admin.updated")}: `#{updated_at}`\n"
           if user.language_code
             io << "   🌐 #{I18n.translate("admin.lang")}: `#{user.language_code}`\n"
           end
@@ -233,7 +234,7 @@ module DetransportTelegram
 
           # Timestamp
           if created_at = msg.created_at
-            formatted_time = created_at.to_s("%Y-%m-%d %H:%M:%S")
+            formatted_time = created_at.in(Config.timezone).to_s("%Y-%m-%d %H:%M:%S")
             io << "   🕐 #{formatted_time}\n"
           end
 

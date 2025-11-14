@@ -22,6 +22,10 @@ module DetransportTelegram
       ENV["ADMIN_TELEGRAM_ID"].to_i64
     end
 
+    def timezone : Time::Location
+      Time::Location.load("Europe/Kyiv")
+    end
+
     def self.date
       {{ `date -R`.stringify.chomp }}
     end
