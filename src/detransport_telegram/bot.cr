@@ -51,6 +51,11 @@ module DetransportTelegram
 
     private def store_message(telegram_message : TelegramBot::Message, user : User)
       if text = telegram_message.text
+        # Don't store admin commands from admin user
+        if user.telegram_id == Config.admin_telegram_id && text.starts_with?("/admin:")
+          return
+        end
+
         user.messages.create(
           telegram_message_id: telegram_message.message_id,
           telegram_message_date: telegram_message.date,
