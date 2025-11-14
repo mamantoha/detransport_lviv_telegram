@@ -163,15 +163,9 @@ module DetransportTelegram
         users.each_with_index do |user, index|
           io << "#{index + 1}. "
           io << "ID: `#{user.telegram_id}` "
-          if user.first_name
-            io << "#{user.first_name}"
-          end
-          if user.last_name
-            io << " #{user.last_name}"
-          end
-          if user.username
-            io << " (@#{user.username})"
-          end
+          io << "#{user.first_name}" if user.first_name
+          io << " #{user.last_name}" if user.last_name
+          io << " (@#{user.username})" if user.username
           io << "\n"
           updated_at = user.updated_at.try { |t| t.in(Config.timezone).to_s("%Y-%m-%d %H:%M") }
           io << "   📅 #{I18n.translate("admin.updated")}: `#{updated_at}`\n"
@@ -212,15 +206,9 @@ module DetransportTelegram
 
           # User info
           if user
-            if user.first_name
-              io << "#{user.first_name}"
-            end
-            if user.last_name
-              io << " #{user.last_name}"
-            end
-            if user.username
-              io << " (@#{user.username})"
-            end
+            io << "#{user.first_name}" if user.first_name
+            io << " #{user.last_name}" if user.last_name
+            io << " (@#{user.username})" if user.username
             io << " (ID: `#{user.telegram_id}`)"
           else
             io << "Unknown User"
