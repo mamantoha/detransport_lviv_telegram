@@ -22,6 +22,10 @@ module DetransportTelegram
 
       if user = load_user(obj)
         user.touch
+
+        if obj.is_a?(TelegramBot::Message)
+          store_message(obj, user)
+        end
       end
 
       klass.new(obj, self).handle
@@ -43,6 +47,22 @@ module DetransportTelegram
           user.language_code = telegram_user.language_code
         end
       end
+    end
+
+    private def store_message(telegram_message : TelegramBot::Message, user : User)
+      if text = telegram_message.text
+        user.messages.create(
+          telegram_message_id: telegram_message.message_id,
+          telegram_message_date: telegram_message.date,
+          telegram_chat_id: telegram_message.chat.id,
+          telegram_chat_type: telegram_message.chat.type,
+          text: text
+        )
+
+        DetransportTelegram::Log.debug { "Stored message #{telegram_message.message_id} from user #{user.telegram_id}" }
+      end
+    rescue e
+      DetransportTelegram::Log.error { "Failed to store message: #{e.message}" }
     end
 
     @@stops : DetransportTelegram::Stops?

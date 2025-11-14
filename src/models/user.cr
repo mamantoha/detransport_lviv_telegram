@@ -1,6 +1,8 @@
 class User
   include Lustra::Model
 
+  has_many messages : Message
+
   primary_key
 
   column telegram_id : Int64
