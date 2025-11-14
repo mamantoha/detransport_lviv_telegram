@@ -16,7 +16,7 @@ class Message
 
   def message : String
     text ||
-      location.try { |l| Geo::Coord.new(l.x, l.y).to_s } ||
+      location.try { |l| Geo::Coord.new(l.y, l.x).to_s } ||
       ""
   end
 end
