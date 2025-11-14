@@ -28,6 +28,9 @@ en:
     users_total: total
     updated: Updated
     lang: Lang
+    messages_list_title: Recent Messages
+    message_from: from
+    message_at: at
   city:
     current_date: Date
     current_time: Current time

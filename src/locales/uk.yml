@@ -35,6 +35,9 @@ uk:
     users_total: всього
     updated: Оновлено
     lang: Мова
+    messages_list_title: Останні повідомлення
+    message_from: від
+    message_at: о
   city:
     current_date: Дата
     current_time: Поточний час

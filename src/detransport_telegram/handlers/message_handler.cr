@@ -43,6 +43,8 @@ module DetransportTelegram
         case $1
         when "users"
           handle_users(message)
+        when "messages"
+          handle_messages(message)
         end
       else
       end
@@ -176,6 +178,70 @@ module DetransportTelegram
             io << "   🌐 #{I18n.translate("admin.lang")}: `#{user.language_code}`\n"
           end
           io << "\n"
+        end
+      end.to_s
+
+      buttons = [
+        [
+          TelegramBot::InlineKeyboardButton.new(
+            text: "🗑 #{I18n.translate("messages.delete_message")}",
+            callback_data: "delete_message"
+          ),
+        ],
+      ]
+
+      keyboard = TelegramBot::InlineKeyboardMarkup.new(buttons)
+
+      bot.send_message(chat_id, text, parse_mode: "Markdown", reply_markup: keyboard)
+    end
+
+    private def handle_messages(message : TelegramBot::Message)
+      messages = Message.query
+        .with_user
+        .order_by(created_at: :desc)
+        .limit(10)
+
+      text = String::Builder.build do |io|
+        io << "💬 *#{I18n.translate("admin.messages_list_title")}* (#{messages.size})"
+        io << "\n\n"
+
+        messages.each_with_index do |msg, index|
+          user = msg.user
+          io << "#{index + 1}. "
+
+          # User info
+          if user
+            if user.first_name
+              io << "#{user.first_name}"
+            end
+            if user.last_name
+              io << " #{user.last_name}"
+            end
+            if user.username
+              io << " (@#{user.username})"
+            end
+            io << " (ID: `#{user.telegram_id}`)"
+          else
+            io << "Unknown User"
+          end
+
+          io << "\n"
+
+          # Message content (truncate if too long)
+          message_text = msg.text.size > 100 ? "#{msg.text[0..97]}..." : msg.text
+          io << "   💬 `#{message_text}`\n"
+
+          # Timestamp
+          if created_at = msg.created_at
+            formatted_time = created_at.to_s("%Y-%m-%d %H:%M:%S")
+            io << "   🕐 #{formatted_time}\n"
+          end
+
+          io << "\n"
+        end
+
+        if messages.empty?
+          io << "_No messages found._"
         end
       end.to_s
 
