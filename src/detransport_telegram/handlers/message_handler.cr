@@ -96,7 +96,18 @@ module DetransportTelegram
         #{I18n.t("city.sunset")}: #{events[:sunset].try(&.to_s("%H:%M:%S"))}
         HEREDOC
 
-      bot.send_message(chat_id, text, parse_mode: "Markdown")
+      buttons = [
+        [
+          TelegramBot::InlineKeyboardButton.new(
+            text: "🗑 #{I18n.translate("messages.delete_message")}",
+            callback_data: "delete_message"
+          ),
+        ],
+      ]
+
+      keyboard = TelegramBot::InlineKeyboardMarkup.new(buttons)
+
+      bot.send_message(chat_id, text, parse_mode: "Markdown", reply_markup: keyboard)
     end
 
     private def handle_location(location : TelegramBot::Location)
