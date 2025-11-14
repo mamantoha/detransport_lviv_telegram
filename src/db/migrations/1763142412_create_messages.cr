@@ -8,7 +8,8 @@ class CreateMessages
         t.column :telegram_message_date, :bigint, null: false
         t.column :telegram_chat_id, :bigint, null: false
         t.column :telegram_chat_type, :string, null: false
-        t.column :text, :text, null: false
+        t.column :text, :text, null: true
+        t.column :location, :point, null: true
 
         t.references to: "users", name: "user_id", on_delete: "cascade", null: false, primary: true
 

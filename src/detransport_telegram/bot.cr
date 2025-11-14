@@ -65,6 +65,16 @@ module DetransportTelegram
         )
 
         DetransportTelegram::Log.debug { "Stored message #{telegram_message.message_id} from user #{user.telegram_id}" }
+      elsif location = telegram_message.location
+        user.messages.create(
+          telegram_message_id: telegram_message.message_id,
+          telegram_message_date: telegram_message.date,
+          telegram_chat_id: telegram_message.chat.id,
+          telegram_chat_type: telegram_message.chat.type,
+          location: PG::Geo::Point.new(location.longitude, location.latitude)
+        )
+
+        DetransportTelegram::Log.debug { "Stored location message #{telegram_message.message_id} from user #{user.telegram_id}" }
       end
     rescue e
       DetransportTelegram::Log.error { "Failed to store message: #{e.message}" }

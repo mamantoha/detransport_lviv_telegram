@@ -229,7 +229,8 @@ module DetransportTelegram
           io << "\n"
 
           # Message content (truncate if too long)
-          message_text = msg.text.size > 100 ? "#{msg.text[0..97]}..." : msg.text
+
+          message_text = msg.message.size > 100 ? "#{msg.message[0..97]}..." : msg.message
           io << "   💬 `#{message_text}`\n"
 
           # Timestamp
