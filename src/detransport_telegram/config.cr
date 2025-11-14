@@ -18,6 +18,10 @@ module DetransportTelegram
       ENV["EWAY_PASSWORD"]
     end
 
+    def admin_telegram_id : Int64
+      ENV["ADMIN_TELEGRAM_ID"].to_i64
+    end
+
     def self.date
       {{ `date -R`.stringify.chomp }}
     end

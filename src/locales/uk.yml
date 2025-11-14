@@ -29,6 +29,12 @@ uk:
     wifi_available: Wi-Fi доступний
     view_on_eway: Переглянути на eWay
     delete_message: Видалити повідомлення
+  admin:
+    access_denied: Доступ заборонено
+    users_list_title: Список користувачів
+    users_total: всього
+    updated: Оновлено
+    lang: Мова
   city:
     current_date: Дата
     current_time: Поточний час

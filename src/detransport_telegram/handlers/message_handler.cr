@@ -37,6 +37,13 @@ module DetransportTelegram
         handle_city
       when /^\/ping/
         bot.reply(message, "🏓")
+      when /^\/admin:(\w+)/
+        return unless authorize_admin!(message)
+
+        case $1
+        when "users"
+          handle_users(message)
+        end
       else
       end
     end
@@ -128,6 +135,62 @@ module DetransportTelegram
       keyboard = TelegramBot::InlineKeyboardMarkup.new(buttons)
 
       bot.send_message(chat_id, text, reply_markup: keyboard)
+    end
+
+    def authorize_admin!(message : TelegramBot::Message) : Bool
+      if telegram_user = message.from
+        unless telegram_user.id == Config.admin_telegram_id
+          bot.reply(message, "⛔ #{I18n.translate("admin.access_denied")}")
+
+          return false
+        end
+
+        true
+      else
+        false
+      end
+    end
+
+    private def handle_users(message : TelegramBot::Message)
+      users = User.query.order_by(updated_at: :desc)
+
+      text = String::Builder.build do |io|
+        io << "👥 *#{I18n.translate("admin.users_list_title")}* (#{users.size} #{I18n.translate("admin.users_total")})"
+        io << "\n\n"
+
+        users.each_with_index do |user, index|
+          io << "#{index + 1}. "
+          io << "ID: `#{user.telegram_id}` "
+          if user.first_name
+            io << "#{user.first_name}"
+          end
+          if user.last_name
+            io << " #{user.last_name}"
+          end
+          if user.username
+            io << " (@#{user.username})"
+          end
+          io << "\n"
+          io << "   📅 #{I18n.translate("admin.updated")}: `#{user.updated_at.try(&.to_s("%Y-%m-%d %H:%M"))} `\n"
+          if user.language_code
+            io << "   🌐 #{I18n.translate("admin.lang")}: `#{user.language_code}`\n"
+          end
+          io << "\n"
+        end
+      end.to_s
+
+      buttons = [
+        [
+          TelegramBot::InlineKeyboardButton.new(
+            text: "🗑 #{I18n.translate("messages.delete_message")}",
+            callback_data: "delete_message"
+          ),
+        ],
+      ]
+
+      keyboard = TelegramBot::InlineKeyboardMarkup.new(buttons)
+
+      bot.send_message(chat_id, text, parse_mode: "Markdown", reply_markup: keyboard)
     end
 
     private def handle_help

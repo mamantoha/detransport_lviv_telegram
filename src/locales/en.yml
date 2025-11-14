@@ -22,6 +22,12 @@ en:
     wifi_available: Wi-Fi available
     view_on_eway: View on eWay
     delete_message: Delete message
+  admin:
+    access_denied: Access denied
+    users_list_title: Users List
+    users_total: total
+    updated: Updated
+    lang: Lang
   city:
     current_date: Date
     current_time: Current time
