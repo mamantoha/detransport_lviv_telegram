@@ -166,6 +166,7 @@ module DetransportTelegram
           io << "#{user.first_name}" if user.first_name
           io << " #{user.last_name}" if user.last_name
           io << " (@#{user.username})" if user.username
+          io << " (#{I18n.translate("admin.messages", count: user.messages_count)})"
           io << "\n"
           updated_at = user.updated_at.try { |t| t.in(Config.timezone).to_s("%Y-%m-%d %H:%M") }
           io << "   📅 #{I18n.translate("admin.updated")}: `#{updated_at}`\n"

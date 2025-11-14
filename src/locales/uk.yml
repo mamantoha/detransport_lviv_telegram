@@ -38,6 +38,12 @@ uk:
     messages_list_title: Останні повідомлення
     message_from: від
     message_at: о
+    messages:
+      zero: "немає повідомлень"
+      one: "1 повідомлення"
+      few: "%{count} повідомлення" # for 2, 3, 4
+      many: "%{count} повідомлень" # for 5-20, and numbers ending in 0, 5-9
+      other: "%{count} повідомлення" # for numbers ending in 1 (but not 11), 2-4 (but not 12-14)
   city:
     current_date: Дата
     current_time: Поточний час
