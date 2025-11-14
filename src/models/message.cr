@@ -1,7 +1,7 @@
 class Message
   include Lustra::Model
 
-  belongs_to user : User
+  belongs_to user : User, counter_cache: true
 
   primary_key
 

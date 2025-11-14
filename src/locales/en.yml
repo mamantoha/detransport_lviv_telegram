@@ -31,6 +31,10 @@ en:
     messages_list_title: Recent Messages
     message_from: from
     message_at: at
+    messages:
+      zero: "no messages"
+      one: "1 message"
+      many: "%{count} messages"
   city:
     current_date: Date
     current_time: Current time

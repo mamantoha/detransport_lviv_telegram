@@ -10,6 +10,7 @@ class User
   column last_name : String?
   column username : String?
   column language_code : String?
+  column messages_count : Int32
 
   timestamps
 end
