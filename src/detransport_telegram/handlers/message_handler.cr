@@ -229,9 +229,11 @@ module DetransportTelegram
           io << "\n"
 
           # Message content (truncate if too long)
-
           message_text = msg.message.size > 100 ? "#{msg.message[0..97]}..." : msg.message
-          io << "   💬 `#{message_text}`\n"
+
+          # Use different icons for text vs location messages
+          message_icon = msg.text ? "💬" : "📍"
+          io << "   #{message_icon} `#{message_text}`\n"
 
           # Timestamp
           if created_at = msg.created_at
