@@ -15,7 +15,7 @@ module DetransportTelegram
         .first(count)
     end
 
-    def similar_to(name : String, count = 9) : Array(Stop)
+    def similar_to(name : String, count = 20) : Array(Stop)
       stops
         .map { |stop| {stop, FuzzyMatch::Full.new(name, stop.name.sub("вул. ", ""))} }
         .select(&.[1].matches?)
