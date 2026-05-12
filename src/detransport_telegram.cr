@@ -25,6 +25,8 @@ I18n.init
 module DetransportTelegram
   VERSION = "0.1.0"
 
+  LVIV_COORDINATES = {49.842957, 24.031111}
+
   Log = ::Log.for(self)
   Log.level = :debug
 

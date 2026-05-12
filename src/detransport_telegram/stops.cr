@@ -22,6 +22,7 @@ module DetransportTelegram
         .sort_by!(&.[1].score)
         .reverse!
         .map(&.[0])
+        .sort_by { |stop| Haversine.distance(stop.latitude, stop.longitude, LVIV_COORDINATES[0], LVIV_COORDINATES[1]) }
         .first(count)
     end
   end
