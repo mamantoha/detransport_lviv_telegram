@@ -280,7 +280,7 @@ module DetransportTelegram
 
     private def build_keyboard_for_similar_stops(stops : Array(DetransportTelegram::Stop))
       stops.reduce([] of Array(TelegramBot::InlineKeyboardButton)) do |arry, stop|
-        text = "🚏 #{stop.full_name}"
+        text = "🚏 #{stop.full_name} [#{stop.id}]"
         arry << [TelegramBot::InlineKeyboardButton.new(text: text, callback_data: "#{stop.id}")]
       end
     end
