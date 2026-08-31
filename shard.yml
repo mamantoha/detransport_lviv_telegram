@@ -1,7 +1,7 @@
 name: detransport_lviv_telegram
 version: 0.1.0
 
-crystal: 1.20.3
+crystal: 1.21.0
 
 dependencies:
   dotenv:

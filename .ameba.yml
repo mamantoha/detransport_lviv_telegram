@@ -8,3 +8,6 @@ Style/VerboseBlock:
   MaxLength: 50
   Enabled: false
   Severity: Convention
+
+Naming/BlockParameterName:
+  Enabled: false
