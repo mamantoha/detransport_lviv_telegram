@@ -14,7 +14,7 @@ shards:
 
   crest:
     git: https://github.com/mamantoha/crest.git
-    version: 1.8.1
+    version: 1.8.1+git.commit.c3a41891db839f523d685abecc2d035eaa84deaa
 
   db:
     git: https://github.com/crystal-lang/crystal-db.git

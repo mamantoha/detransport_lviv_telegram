@@ -10,6 +10,7 @@ dependencies:
     github: geocrystal/haversine
   crest:
     github: mamantoha/crest
+    branch: master
   telegram_bot:
     github: crystal-garage/telegram_bot
     branch: develop
