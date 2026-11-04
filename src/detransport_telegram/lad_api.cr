@@ -65,13 +65,13 @@ module DetransportTelegram
       property? has_schedules : Bool
 
       @[JSON::Field(key: "timeLeft")]
-      property time_left : String
+      property time_left : String? = nil
 
       @[JSON::Field(key: "timeLeftFormatted")]
       property time_left_formatted : String
 
       @[JSON::Field(key: "timeSource")]
-      property time_source : String
+      property time_source : String? = nil
 
       def transport_icon
         case transport_key
@@ -90,10 +90,43 @@ module DetransportTelegram
         end
       end
 
+      def arrival_minutes : Float64?
+        minutes = time_left.try(&.to_f64?)
+        return unless minutes && minutes.finite? && minutes >= 0
+
+        minutes
+      end
+
+      def arrival_source
+        key = case time_source
+              when "gps"      then "arrival_gps"
+              when "schedule" then "arrival_schedule"
+              when "interval" then "arrival_interval"
+              else                 "arrival_source_unknown"
+              end
+
+        I18n.translate("messages.#{key}")
+      end
+
+      def arrival_source_icon
+        return "⚠️" unless arrival_minutes
+
+        case time_source
+        when "gps"      then "📡"
+        when "schedule" then "🗓"
+        when "interval" then "🔁"
+        else                 "❓"
+        end
+      end
+
       def time_left_humanized
+        minutes = arrival_minutes
+        return I18n.translate("messages.arrival_unavailable") unless minutes
+
+        now = Time.local
         HumanizeTime.distance_of_time_in_words(
-          Time.local,
-          Time.local + time_left.to_f.minutes,
+          now,
+          now + minutes.minutes,
           include_seconds: false
         )
       end

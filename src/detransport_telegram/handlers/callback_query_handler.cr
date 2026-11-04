@@ -39,22 +39,26 @@ module DetransportTelegram
     end
 
     private def handle_stop_selection(chat_id : Int64, stop_id : Int32)
+      lad_routes = DetransportTelegram::LadAPI.new.show_routes(stop_id)
+
       bot.send_message(
         chat_id: chat_id,
-        text: routes_text(stop_id),
+        text: routes_text(stop_id, lad_routes),
         parse_mode: "Markdown",
-        reply_markup: update_keyboard(stop_id)
+        reply_markup: update_keyboard(stop_id, lad_routes)
       )
     end
 
     private def handle_update_routes(chat_id : Int64, stop_id : Int32)
       if message = @callback_query.message
+        lad_routes = DetransportTelegram::LadAPI.new.show_routes(stop_id)
+
         bot.edit_message_text(
           chat_id: chat_id,
           message_id: message.message_id,
-          text: routes_text(stop_id),
+          text: routes_text(stop_id, lad_routes),
           parse_mode: "Markdown",
-          reply_markup: update_keyboard(stop_id)
+          reply_markup: update_keyboard(stop_id, lad_routes)
         )
       end
     end
@@ -100,7 +104,7 @@ module DetransportTelegram
           io << "📍 `#{route.direction_title}`" << "\n"
           io << "\n"
           io << "⏰ #{I18n.translate("messages.arrival_time")}: *#{route.time_left_humanized}*" << "\n"
-          io << "📡 #{I18n.translate("messages.data_source")}: `#{route.time_source}`" << "\n"
+          io << "📡 #{I18n.translate("messages.data_source")}: #{route.arrival_source}" << "\n"
           io << "\n"
           if route.has_gps?
             io << "📍 #{I18n.translate("messages.gps_enabled")}" << "\n"
@@ -130,6 +134,8 @@ module DetransportTelegram
         keyboard = TelegramBot::InlineKeyboardMarkup.new(buttons)
 
         bot.send_message(chat_id, text, parse_mode: "Markdown", reply_markup: keyboard)
+      else
+        bot.send_message(chat_id, I18n.translate("messages.route_unavailable"))
       end
     end
 
@@ -139,17 +145,14 @@ module DetransportTelegram
       end
     end
 
-    private def update_keyboard(stop_id : Int32)
-      lad_api = DetransportTelegram::LadAPI.new
-      lad_routes = lad_api.show_routes(stop_id)
-
+    private def update_keyboard(stop_id : Int32, lad_routes : LadAPI::Routes)
       buttons = [] of Array(TelegramBot::InlineKeyboardButton)
 
-      routes = lad_routes.routes.sort_by(&.time_left.to_f)
+      routes = lad_routes.routes.sort_by { |route| route.arrival_minutes || Float64::INFINITY }
 
       # Add route buttons
       routes.each do |route|
-        button_text = "#{route.transport_icon} #{route.title} (#{route.direction_title}) - #{route.time_left_humanized}"
+        button_text = "#{route.transport_icon} #{route.arrival_source_icon} #{route.title} (#{route.direction_title}) - #{route.time_left_humanized}"
         callback_data = "route_#{stop_id}_#{route.id}"
         buttons << [TelegramBot::InlineKeyboardButton.new(text: button_text, callback_data: callback_data)]
       end
@@ -182,10 +185,7 @@ module DetransportTelegram
       TelegramBot::InlineKeyboardMarkup.new(buttons)
     end
 
-    private def routes_text(stop_id : Int32)
-      lad_api = DetransportTelegram::LadAPI.new
-      lad_routes = lad_api.show_routes(stop_id)
-
+    private def routes_text(stop_id : Int32, lad_routes : LadAPI::Routes)
       stops = DetransportTelegram::Bot.stops
       stop = stops.get_by_id(stop_id)
       stop_title = stop.try(&.full_name) || lad_routes.title
@@ -196,6 +196,11 @@ module DetransportTelegram
       String::Builder.build do |io|
         io << "🚏 `#{stop_title}`" << "\n"
         io << "\n"
+        if lad_routes.routes.empty?
+          io << I18n.translate("messages.no_arrivals") << "\n\n"
+        elsif lad_routes.routes.all? { |route| route.arrival_minutes.nil? }
+          io << I18n.translate("messages.arrival_unavailable") << "\n\n"
+        end
         io << "_#{I18n.translate("messages.last_updated")}: #{formatted_time}_"
       end.to_s
     end

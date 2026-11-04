@@ -23,6 +23,13 @@ uk:
     update_routes: Оновити розклад
     last_updated: Останнє оновлення
     arrival_time: Час прибуття
+    arrival_gps: Прогноз за GPS
+    arrival_schedule: За розкладом
+    arrival_interval: Оцінка за інтервалом руху
+    arrival_source_unknown: Джерело невідоме
+    arrival_unavailable: Прогноз прибуття відсутній
+    no_arrivals: Для цієї зупинки немає доступних маршрутів або прогнозів прибуття.
+    route_unavailable: Цього маршруту вже немає у списку прибуття. Оновіть зупинку, щоб переглянути актуальні прибуття.
     data_source: Джерело даних
     gps_enabled: GPS увімкнено
     accessible: Доступний для людей з інвалідністю
