@@ -10,6 +10,8 @@ module DetransportTelegram
         connect_timeout: 5.seconds,
         read_timeout: 10.seconds,
         write_timeout: 10.seconds,
+        logging: false,
+        logger: APILogger.new,
         params: {
           "login"    => login,
           "password" => password,
