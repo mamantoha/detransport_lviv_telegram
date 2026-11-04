@@ -25,6 +25,10 @@ module DetransportTelegram
         when /^map_(\d+)$/
           stop_id = $1.to_i
           handle_show_on_map(chat_id, stop_id)
+        when /^refresh_route_(\d+)_(\d+)$/
+          stop_id = $1.to_i
+          route_id = $2.to_i
+          handle_route_selection(chat_id, stop_id, route_id, refresh: true)
         when /^route_(\d+)_(\d+)$/
           stop_id = $1.to_i
           route_id = $2.to_i
@@ -89,16 +93,64 @@ module DetransportTelegram
       end
     end
 
-    private def handle_route_selection(chat_id : Int64, stop_id : Int32, route_id : Int32)
+    private def handle_route_selection(chat_id : Int64, stop_id : Int32, route_id : Int32, refresh = false)
       lad_api = DetransportTelegram::LadAPI.new
       lad_routes = lad_api.show_routes(stop_id)
 
+      text = route_text(stop_id, route_id, lad_routes)
+
+      buttons = [
+        [
+          TelegramBot::InlineKeyboardButton.new(
+            text: "⬅️ #{I18n.translate("messages.back_to_stop")}",
+            callback_data: "update_#{stop_id}"
+          ),
+        ],
+        [
+          TelegramBot::InlineKeyboardButton.new(
+            text: "🔄 #{I18n.translate("messages.refresh_route")}",
+            callback_data: "refresh_route_#{stop_id}_#{route_id}"
+          ),
+        ],
+        [
+          TelegramBot::InlineKeyboardButton.new(
+            text: "🌐 #{I18n.translate("messages.view_on_eway")}",
+            url: "https://www.eway.in.ua/ua/cities/lviv/routes/#{route_id}"
+          ),
+        ],
+        [
+          TelegramBot::InlineKeyboardButton.new(
+            text: "🗑 #{I18n.translate("messages.delete_message")}",
+            callback_data: "delete_message"
+          ),
+        ],
+      ]
+      keyboard = TelegramBot::InlineKeyboardMarkup.new(buttons)
+
+      if refresh
+        if message = @callback_query.message
+          bot.edit_message_text(
+            chat_id: chat_id,
+            message_id: message.message_id,
+            text: text,
+            parse_mode: "Markdown",
+            reply_markup: keyboard
+          )
+        end
+      else
+        bot.send_message(chat_id, text, parse_mode: "Markdown", reply_markup: keyboard)
+      end
+    rescue e : TelegramBot::APIException
+      raise e unless refresh && e.description.try(&.starts_with?("Bad Request: message is not modified"))
+    end
+
+    private def route_text(stop_id : Int32, route_id : Int32, lad_routes : LadAPI::Routes)
       if route = lad_routes.routes.find(&.id.== route_id)
         stops = DetransportTelegram::Bot.stops
         stop = stops.get_by_id(stop_id)
         stop_title = stop.try(&.full_name) || lad_routes.title
 
-        text = String::Builder.build do |io|
+        String::Builder.build do |io|
           io << "🚏 `#{stop_title}`" << "\n"
           io << "#{route.transport_icon} `#{route.transport_name} #{route.title}`" << "\n"
           io << "📍 `#{route.direction_title}`" << "\n"
@@ -116,26 +168,8 @@ module DetransportTelegram
             io << "📶 #{I18n.translate("messages.wifi_available")}" << "\n"
           end
         end.to_s
-
-        buttons = [
-          [
-            TelegramBot::InlineKeyboardButton.new(
-              text: "🌐 #{I18n.translate("messages.view_on_eway")}",
-              url: "https://www.eway.in.ua/ua/cities/lviv/routes/#{route_id}"
-            ),
-          ],
-          [
-            TelegramBot::InlineKeyboardButton.new(
-              text: "🗑 #{I18n.translate("messages.delete_message")}",
-              callback_data: "delete_message"
-            ),
-          ],
-        ]
-        keyboard = TelegramBot::InlineKeyboardMarkup.new(buttons)
-
-        bot.send_message(chat_id, text, parse_mode: "Markdown", reply_markup: keyboard)
       else
-        bot.send_message(chat_id, I18n.translate("messages.route_unavailable"))
+        I18n.translate("messages.route_unavailable")
       end
     end
 

@@ -25,6 +25,8 @@ uk:
     share_location: Поділитися розташуванням
     show_stop_on_map: Показати зупинку на карті
     update_routes: Оновити розклад
+    back_to_stop: До зупинки
+    refresh_route: Оновити дані маршруту
     last_updated: Останнє оновлення
     arrival_time: Час прибуття
     arrival_gps: Прогноз за GPS

@@ -26,6 +26,8 @@ en:
     share_location: Share location
     show_stop_on_map: Show bus stop on the map
     update_routes: Update schedule
+    back_to_stop: Back to stop
+    refresh_route: Refresh route details
     last_updated: Last updated
     arrival_time: Arrival time
     arrival_gps: GPS prediction
