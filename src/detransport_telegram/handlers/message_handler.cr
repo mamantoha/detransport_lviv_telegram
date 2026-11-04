@@ -273,14 +273,14 @@ module DetransportTelegram
     private def build_keyboard_for_nearest_stops(stops : Array(DetransportTelegram::Stop), location : TelegramBot::Location)
       stops.reduce([] of Array(TelegramBot::InlineKeyboardButton)) do |arry, stop|
         distance = Haversine.distance(stop.latitude, stop.longitude, location.latitude, location.longitude)
-        text = "🚏 #{stop.full_name} - #{distance.to_meters.to_i} m"
+        text = "🚏 #{stop.name} - #{distance.to_meters.to_i} m"
         arry << [TelegramBot::InlineKeyboardButton.new(text: text, callback_data: "#{stop.id}")]
       end
     end
 
     private def build_keyboard_for_similar_stops(stops : Array(DetransportTelegram::Stop))
       stops.reduce([] of Array(TelegramBot::InlineKeyboardButton)) do |arry, stop|
-        text = "🚏 #{stop.full_name} [#{stop.id}]"
+        text = "🚏 #{stop.name} [#{stop.id}]"
         arry << [TelegramBot::InlineKeyboardButton.new(text: text, callback_data: "#{stop.id}")]
       end
     end

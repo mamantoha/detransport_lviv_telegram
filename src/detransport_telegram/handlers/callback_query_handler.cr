@@ -88,7 +88,7 @@ module DetransportTelegram
           chat_id,
           latitude: stop.latitude,
           longitude: stop.longitude,
-          title: stop.full_name,
+          title: stop.name,
           address: "\n🧭 #{coord}",
           reply_markup: keyboard
         )
@@ -178,7 +178,7 @@ module DetransportTelegram
       if route = lad_routes.routes.find(&.id.== route_id)
         stops = DetransportTelegram::Bot.stops
         stop = stops.get_by_id(stop_id)
-        stop_title = stop.try(&.full_name) || lad_routes.title
+        stop_title = stop.try(&.name) || lad_routes.title
 
         String::Builder.build do |io|
           io << "🚏 `#{stop_title}`" << "\n"
@@ -252,7 +252,7 @@ module DetransportTelegram
     private def routes_text(stop_id : Int32, lad_routes : LadAPI::Routes)
       stops = DetransportTelegram::Bot.stops
       stop = stops.get_by_id(stop_id)
-      stop_title = stop.try(&.full_name) || lad_routes.title
+      stop_title = stop.try(&.name) || lad_routes.title
 
       current_time = Time.local(Time::Location.load("Europe/Kyiv"))
       formatted_time = current_time.to_s("%Y-%m-%d %H:%M:%S")
