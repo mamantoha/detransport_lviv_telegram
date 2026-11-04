@@ -36,6 +36,8 @@ en:
     arrival_source_unknown: Source unknown
     arrival_unavailable: No arrival prediction
     no_arrivals: No routes or arrival predictions are available for this stop.
+    arrivals_fetch_failed: Couldn’t fetch arrivals. Please try again.
+    retry: Try again
     route_unavailable: This route is no longer in the arrival list. Refresh the stop to see current arrivals.
     data_source: Data source
     gps_enabled: GPS enabled

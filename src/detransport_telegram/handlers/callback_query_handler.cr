@@ -43,7 +43,8 @@ module DetransportTelegram
     end
 
     private def handle_stop_selection(chat_id : Int64, stop_id : Int32)
-      lad_routes = DetransportTelegram::LadAPI.new.show_routes(stop_id)
+      lad_routes = fetch_routes(chat_id, stop_id, "update_#{stop_id}")
+      return unless lad_routes
 
       bot.send_message(
         chat_id: chat_id,
@@ -55,7 +56,8 @@ module DetransportTelegram
 
     private def handle_update_routes(chat_id : Int64, stop_id : Int32)
       if message = @callback_query.message
-        lad_routes = DetransportTelegram::LadAPI.new.show_routes(stop_id)
+        lad_routes = fetch_routes(chat_id, stop_id, "update_#{stop_id}")
+        return unless lad_routes
 
         bot.edit_message_text(
           chat_id: chat_id,
@@ -94,8 +96,8 @@ module DetransportTelegram
     end
 
     private def handle_route_selection(chat_id : Int64, stop_id : Int32, route_id : Int32, refresh = false)
-      lad_api = DetransportTelegram::LadAPI.new
-      lad_routes = lad_api.show_routes(stop_id)
+      lad_routes = fetch_routes(chat_id, stop_id, "refresh_route_#{stop_id}_#{route_id}")
+      return unless lad_routes
 
       text = route_text(stop_id, route_id, lad_routes)
 
@@ -142,6 +144,34 @@ module DetransportTelegram
       end
     rescue e : TelegramBot::APIException
       raise e unless refresh && e.description.try(&.starts_with?("Bad Request: message is not modified"))
+    end
+
+    private def fetch_routes(chat_id : Int64, stop_id : Int32, retry_data : String) : LadAPI::Routes?
+      LadAPI.new.show_routes(stop_id)
+    rescue e : Crest::RequestFailed | IO::Error | Socket::Error | OpenSSL::Error | JSON::ParseException
+      DetransportTelegram::Log.error { "Failed to fetch arrivals for stop #{stop_id}: #{e.class}" }
+
+      buttons = [
+        [
+          TelegramBot::InlineKeyboardButton.new(
+            text: "🔄 #{I18n.translate("messages.retry")}",
+            callback_data: retry_data
+          ),
+        ],
+        [
+          TelegramBot::InlineKeyboardButton.new(
+            text: "🗑 #{I18n.translate("messages.delete_message")}",
+            callback_data: "delete_message"
+          ),
+        ],
+      ]
+
+      bot.send_message(
+        chat_id,
+        "⚠️ #{I18n.translate("messages.arrivals_fetch_failed")}",
+        reply_markup: TelegramBot::InlineKeyboardMarkup.new(buttons)
+      )
+      nil
     end
 
     private def route_text(stop_id : Int32, route_id : Int32, lad_routes : LadAPI::Routes)

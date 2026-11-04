@@ -7,6 +7,9 @@ module DetransportTelegram
 
       @conn = Crest::Resource.new(
         url,
+        connect_timeout: 5.seconds,
+        read_timeout: 10.seconds,
+        write_timeout: 10.seconds,
         params: {
           "login"    => login,
           "password" => password,
