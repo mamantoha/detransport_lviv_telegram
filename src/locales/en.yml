@@ -10,7 +10,19 @@ en:
 
       - Send any message to list bus stations etc.
 
-      - Send current location to locate the closest bus stop."
+      - Send current location to locate the closest bus stop.
+
+      *Arrival status:*
+
+      📡 - GPS prediction.
+
+      🗓 - Scheduled arrival.
+
+      🔁 - Service interval estimate.
+
+      ❓ - Prediction source unknown.
+
+      ⚠️ - No arrival prediction."
     share_location: Share location
     show_stop_on_map: Show bus stop on the map
     update_routes: Update schedule
