@@ -10,15 +10,15 @@ shards:
 
   cookie_jar:
     git: https://github.com/mamantoha/http-cookie_jar.git
-    version: 0.1.0
+    version: 0.2.0
 
   crest:
     git: https://github.com/mamantoha/crest.git
-    version: 1.8.1+git.commit.c3a41891db839f523d685abecc2d035eaa84deaa
+    version: 1.9.0+git.commit.16f09c13ae2eaef5f73a1277889c3580bb4e1d47
 
   db:
     git: https://github.com/crystal-lang/crystal-db.git
-    version: 0.13.1
+    version: 0.15.0
 
   dotenv:
     git: https://github.com/gdotdesign/cr-dotenv.git
@@ -58,7 +58,7 @@ shards:
 
   http_proxy:
     git: https://github.com/mamantoha/http_proxy.git
-    version: 0.16.0
+    version: 0.17.0
 
   humanize_time:
     git: https://github.com/mamantoha/humanize_time.git
@@ -74,11 +74,11 @@ shards:
 
   lustra:
     git: https://github.com/crystal-garage/lustra.git
-    version: 0.18.3+git.commit.4413f471358e32a2a1514e4c4445e034441a781e
+    version: 0.18.3+git.commit.55d4811e570ff3d1059fed63deb54c6b9a46cc0d
 
   pg:
     git: https://github.com/will/crystal-pg.git
-    version: 0.29.0
+    version: 0.32.0+git.commit.c306b5876760f373c73d472769bc3cf296ed91ef
 
   polygon_contains:
     git: https://github.com/geocrystal/polygon_contains.git

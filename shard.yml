@@ -17,8 +17,6 @@ dependencies:
   lustra:
     github: crystal-garage/lustra
     branch: main
-  pg:
-    github: will/crystal-pg
   i18n:
     github: crystal-i18n/i18n
   geo:
